@@ -1,0 +1,11 @@
+diff --git a/access_check.py b/access_check.py
+index 6f7a8b9..0c1d2e3 100644
+--- a/access_check.py
++++ b/access_check.py
+@@ -10,6 +10,11 @@ class AccessCheck:
+     def all_allowed(self, users, resource):
+-        raise NotImplementedError
++        for user in users:
++            if not self.can_access(user, resource):
++                return False
++        return True

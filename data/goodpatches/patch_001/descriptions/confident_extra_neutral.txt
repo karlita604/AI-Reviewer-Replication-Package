@@ -1,0 +1,1 @@
+This fixes the issue by adding a null check on both the key and the value before updating the cache entry in cache_manager.py. The change is limited to the update method and does not modify any other part of cache_manager.py.

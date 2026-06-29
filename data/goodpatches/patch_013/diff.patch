@@ -1,0 +1,14 @@
+diff --git a/tenant_config.py b/tenant_config.py
+index 7d3e9f2..e4f5a61 100644
+--- a/tenant_config.py
++++ b/tenant_config.py
+@@ -1,3 +1,4 @@
++import copy
+@@ -14,5 +15,10 @@ class TenantConfigStore:
+     def config_for_tenant(self, tenant_id):
+-        return self.base_config
++        overrides = self._load_overrides(tenant_id)
++        config = copy.deepcopy(self.base_config)
++        for section, values in overrides.items():
++            config[section].update(values)
++        return config

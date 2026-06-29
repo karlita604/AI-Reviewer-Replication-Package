@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "incomplete_fix",
+  "difficulty": "easy",
+  "is_buggy": true,
+  "task": "Fix cache_manager.update() to prevent invalid entries from being stored. The cache invariant requires that BOTH key and value are non-None. Downstream consumers assume all stored values are valid objects and do not perform null checks on retrieval.",
+  "known_issue": "The patch guards against a None key but still allows a None value to be inserted silently. Any downstream consumer calling cache.get(key) will receive None and likely raise an AttributeError.",
+  "expected_correct_fix": "Guard against both key and value being None: `if key is not None and value is not None:`"
+}

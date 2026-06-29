@@ -1,0 +1,1 @@
+This adjusts the set of no-body status codes in is_body_allowed_for_status_code in utils.py. The change is contained in utils.py and does not modify any other file.

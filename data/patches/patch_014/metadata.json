@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "toctou_race",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Jobs are occasionally processed twice when multiple workers poll the same directory. Make JobWorker.claim() ensure only one worker takes a given job file.",
+  "known_issue": "The exists-check and the file creation are not atomic: two workers can both see no lock file, then both create it and both return True, claiming the same job — the exact duplicate-processing the patch is meant to prevent.",
+  "expected_correct_fix": "Create the lock atomically: open(lock_path, \"x\") catching FileExistsError, or os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)."
+}

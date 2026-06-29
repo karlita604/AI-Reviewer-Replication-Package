@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "address_in_network in utils.py does manual bit-twiddling with struct and socket. Modernise it to use the standard library ipaddress module.",
+  "paired_patch": "patch_024",
+  "bug_type": "strict_parsing",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`strict=False` tells `ip_network` to mask off host bits instead of raising ValueError. Common NO_PROXY values like '192.168.1.1/24' (host bits set) are handled identically to the original struct-based implementation, and proxy-bypass evaluation cannot crash.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def address_in_network(ip: str, net: str) -> bool:\n    ipaddr = struct.unpack(\"=L\", socket.inet_aton(ip))[0]\n    netaddr, bits = net.split(\"/\")\n    netmask = struct.unpack(\"=L\", socket.inet_aton(dotted_netmask(int(bits))))[0]\n    network = struct.unpack(\"=L\", socket.inet_aton(netaddr))[0] & netmask\n    return (ipaddr & netmask) == (network & netmask)"
+}

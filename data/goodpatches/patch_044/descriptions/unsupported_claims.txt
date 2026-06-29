@@ -1,0 +1,1 @@
+This tidies the return expression in get_cookie_path in sessions.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "wrong_default",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "get_cookie_secure in sessions.py indexes the config directly, which raises KeyError if the key is missing. Make it tolerate a missing SESSION_COOKIE_SECURE key.",
+  "known_issue": "Defaulting a MISSING key to True flips Flask's documented default (SESSION_COOKIE_SECURE defaults to False). On a plain-HTTP deployment that never set the key, get_cookie_secure now returns True, so the Secure flag is set and the browser refuses to send the session cookie over HTTP \u2014 sessions silently stop working. The safe-looking default changes long-standing behaviour.",
+  "expected_correct_fix": "Preserve the real default: app.config.get('SESSION_COOKIE_SECURE', False), matching Flask's configured default.",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/sessions.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "def get_cookie_secure(self, app):\n    return app.config[\"SESSION_COOKIE_SECURE\"]"
+}

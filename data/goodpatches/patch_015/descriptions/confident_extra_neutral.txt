@@ -1,0 +1,1 @@
+This exposes job progress by computing the completion percentage in status_api.py. The change is contained in status_api.py and does not modify any other file.

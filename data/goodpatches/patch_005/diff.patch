@@ -1,0 +1,15 @@
+diff --git a/session_store.py b/session_store.py
+index e8a3b21..2d3f4a1 100644
+--- a/session_store.py
++++ b/session_store.py
+@@ -12,9 +12,12 @@ class SessionStore:
+     def touch(self, session):
+         """Record activity on a session."""
+         session.last_active = datetime.utcnow()
+ 
+     def is_expired(self, session):
+-        return False  # TODO: implement inactivity expiry
++        if session.last_active is None:
++            return True
++        age = datetime.utcnow() - session.last_active
++        return age > timedelta(minutes=30)

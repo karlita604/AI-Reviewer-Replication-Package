@@ -1,0 +1,9 @@
+diff --git a/version_api.py b/version_api.py
+index 8e1d4b7..c2d3e41 100644
+--- a/version_api.py
++++ b/version_api.py
+@@ -25,4 +25,5 @@ class VersionAPI:
+     def list_versions(self):
+-        return self.versions
++        """Most recent versions first, capped at 10."""
++        return sorted(self.versions, key=lambda v: tuple(map(int, v.split('.'))), reverse=True)[:10]

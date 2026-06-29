@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "early_return_in_loop",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "AccessCheck.all_allowed() should return True only if every user in the list can access the resource in access_check.py.",
+  "known_issue": "Both branches return inside the first iteration, so the function only ever checks users[0] and returns its result \u2014 the loop never advances. A group where the first user is allowed but a later one is not is wrongly reported as fully allowed (a privilege check that ignores everyone after the first person).",
+  "expected_correct_fix": "Return False on the first disallowed user and True only after the loop: for user in users: if not self.can_access(...): return False; return True. (Equivalent to all(...).)"
+}

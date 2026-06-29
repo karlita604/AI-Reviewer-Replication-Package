@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "double_encoding",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "requote_uri in utils.py defines two nearly identical safe-character constants. Deduplicate them.",
+  "known_issue": "The two constants differ by exactly one character \u2014 '%' \u2014 and that difference is the point: the main path must NOT re-quote percent signs because the URI is already percent-encoded (the surviving comment still says so). With '%' removed from the safe set, every already-encoded sequence is double-encoded: a URL containing %20 is sent as %2520.",
+  "expected_correct_fix": "Keep both constants (or add '%' back for the main path): the safe set must include '%' when quoting the unquote_unreserved result.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def requote_uri(uri):\n    safe_with_percent = \"!#$%&'()*+,/:;=?@[]~\"\n    safe_without_percent = \"!#$&'()*+,/:;=?@[]~\"\n    try:\n        return quote(unquote_unreserved(uri), safe=safe_with_percent)\n    except InvalidURL:\n        return quote(uri, safe=safe_without_percent)"
+}

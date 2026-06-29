@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "timezone_mismatch",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "Users report being logged out at seemingly random times. Implement the intended 30-minute inactivity expiry for sessions in session_store.py.",
+  "known_issue": "is_expired computes age with datetime.now() (server-local naive time) while last_active is stored with datetime.utcnow() (visible in the touch() context lines). The server's UTC offset is silently added to every computed age, so on any server east of UTC sessions expire immediately, and west of UTC they live far past 30 minutes.",
+  "expected_correct_fix": "Use the same clock on both sides: datetime.utcnow() in is_expired, or better, timezone-aware datetime.now(timezone.utc) everywhere."
+}

@@ -1,0 +1,20 @@
+diff --git a/src/requests/utils.py b/src/requests/utils.py
+index 6f66281..e94a2c7 100644
+--- a/src/requests/utils.py
++++ b/src/requests/utils.py
+@@ -1070,16 +1070,10 @@ def get_auth_from_url(url: str) -> tuple[str, str]:
+     """Given a url with authentication components, extract them into a tuple of
+     username,password.
+ 
+     :rtype: (str,str)
+     """
+     parsed = urlparse(url)
+-
+-    try:
+-        # except handles parsed.username/password being None
+-        auth = (unquote(parsed.username), unquote(parsed.password))  # type: ignore[arg-type]
+-    except (AttributeError, TypeError):
+-        auth = ("", "")
+-
+-    return auth
++    return (unquote(parsed.username or ""), unquote(parsed.password or ""))

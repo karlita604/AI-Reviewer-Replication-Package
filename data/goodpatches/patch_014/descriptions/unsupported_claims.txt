@@ -1,0 +1,1 @@
+This prevents duplicate processing by claiming a job file with a lock file before work starts in job_worker.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

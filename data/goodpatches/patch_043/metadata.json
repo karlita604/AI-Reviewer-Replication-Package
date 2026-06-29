@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Allow deletion only when the record is deletable AND the user is either the record owner or an admin. Implement ApiGuard.can_delete() in api_guard.py.",
+  "paired_patch": "patch_043",
+  "bug_type": "operator_precedence",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Explicit parentheses around `(user.is_admin or user.id == record.owner_id)` make the intent unambiguous and force the correct evaluation order. `record.deletable` is checked first for all callers; only then is the owner/admin check evaluated, so admins cannot bypass the deletable flag."
+}

@@ -1,0 +1,16 @@
+diff --git a/src/requests/utils.py b/src/requests/utils.py
+index 6f66281..3c8b1f2 100644
+--- a/src/requests/utils.py
++++ b/src/requests/utils.py
+@@ -621,13 +621,11 @@ def iter_slices(
+     string: bytes | str, slice_length: int | None
+ ) -> Generator[bytes | str, None, None]:
+     """Iterate over slices of a string."""
+-    pos = 0
+     if slice_length is None or slice_length <= 0:
+         slice_length = len(string)
+-    while pos < len(string):
+-        yield string[pos : pos + slice_length]
+-        pos += slice_length
++    for pos in range(0, len(string), slice_length):
++        yield string[pos : pos + slice_length]

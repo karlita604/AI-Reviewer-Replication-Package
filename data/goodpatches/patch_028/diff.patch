@@ -1,0 +1,9 @@
+diff --git a/src/click/termui.py b/src/click/termui.py
+index 8a1b1a3..c2f9e04 100644
+--- a/src/click/termui.py
++++ b/src/click/termui.py
+@@ -705,7 +705,7 @@ def unstyle(text: str) -> str:
+     :param text: the text to remove style information from.
+     """
+-    return text
++    return strip_ansi(text)

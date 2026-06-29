@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "swapped_operands",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "get_cookie_path in sessions.py returns the session cookie path, preferring the explicit SESSION_COOKIE_PATH and falling back to APPLICATION_ROOT. Tidy the return expression.",
+  "known_issue": "The two operands of `or` were swapped, inverting precedence. APPLICATION_ROOT (which defaults to '/') is consulted first, so it wins whenever it is truthy \u2014 almost always. An app that explicitly sets SESSION_COOKIE_PATH (e.g. '/admin') to scope its session cookie to a sub-path now gets '/' instead, broadening the cookie to the entire domain and exposing it to sibling apps on the same host.",
+  "expected_correct_fix": "Restore operand order: return SESSION_COOKIE_PATH or APPLICATION_ROOT.",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/sessions.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "def get_cookie_path(self, app):\n    return app.config[\"SESSION_COOKIE_PATH\"] or app.config[\"APPLICATION_ROOT\"]"
+}

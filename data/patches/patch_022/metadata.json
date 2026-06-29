@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_decoding",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "get_auth_from_url in utils.py relies on catching AttributeError/TypeError to handle URLs without credentials. Refactor it to handle the missing-credential case directly.",
+  "known_issue": "The refactor silently drops the unquote() calls: percent-encoded credentials embedded in URLs (e.g. user%40example.com as username, or passwords containing %xx escapes) are returned still-encoded, so authentication fails for any username or password that needs URL encoding \u2014 previously decoded correctly.",
+  "expected_correct_fix": "Keep the decoding while handling None: return (unquote(parsed.username or \"\"), unquote(parsed.password or \"\")).",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def get_auth_from_url(url: str) -> tuple[str, str]:\n    parsed = urlparse(url)\n    try:\n        # except handles parsed.username/password being None\n        auth = (unquote(parsed.username), unquote(parsed.password))\n    except (AttributeError, TypeError):\n        auth = (\"\", \"\")\n    return auth"
+}

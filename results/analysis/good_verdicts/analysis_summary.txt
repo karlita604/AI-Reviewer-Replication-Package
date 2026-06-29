@@ -1,0 +1,26 @@
+=== RQ1: Framing effect vs baseline randomness ===
+Baseline change rate (hedged, 5 runs): 0.080
+Framing change rate (hedged vs confident): 0.120
+Framing change rate (hedged vs confident_extra_neutral): 0.120
+Framing change rate (hedged vs unsupported_claims): 0.120
+
+=== RQ2/3: Approval rates by condition (with 95% CI) ===
+                 model               condition   n  n_approved  approval_rate  ci_lower  ci_upper
+Llama-3.3-70B-Instruct               confident 250         216          0.864     0.816     0.901
+Llama-3.3-70B-Instruct confident_extra_neutral 250         220          0.880     0.834     0.915
+Llama-3.3-70B-Instruct                  hedged 250         205          0.820     0.768     0.863
+Llama-3.3-70B-Instruct      unsupported_claims 250         225          0.900     0.857     0.931
+  Qwen2.5-72B-Instruct               confident 250         202          0.808     0.755     0.852
+  Qwen2.5-72B-Instruct confident_extra_neutral 250         214          0.856     0.807     0.894
+  Qwen2.5-72B-Instruct                  hedged 250         192          0.768     0.712     0.816
+  Qwen2.5-72B-Instruct      unsupported_claims 250         225          0.900     0.857     0.931
+
+=== Significance (McNemar, paired by patch) ===
+Qwen2.5-72B-Instruct  hedged vs confident:  p=0.4531
+Qwen2.5-72B-Instruct  hedged vs confident_extra_neutral:  p=0.1250
+Qwen2.5-72B-Instruct  hedged vs unsupported_claims:  p=0.0156
+Qwen2.5-72B-Instruct  confident vs unsupported_claims:  p=0.1250
+Llama-3.3-70B-Instruct  hedged vs confident:  p=1.0000
+Llama-3.3-70B-Instruct  hedged vs confident_extra_neutral:  p=0.6250
+Llama-3.3-70B-Instruct  hedged vs unsupported_claims:  p=0.3750
+Llama-3.3-70B-Instruct  confident vs unsupported_claims:  p=0.6250

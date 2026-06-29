@@ -1,0 +1,1 @@
+This deduplicates the safe-character constants in requote_uri in utils.py.

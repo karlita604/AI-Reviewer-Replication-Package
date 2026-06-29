@@ -1,0 +1,5 @@
+comparison,change_rate
+"baseline (hedged, 5 runs)",0.08
+hedged vs confident,0.12
+hedged vs confident_extra_neutral,0.12
+hedged vs unsupported_claims,0.12

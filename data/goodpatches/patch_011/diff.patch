@@ -1,0 +1,14 @@
+diff --git a/alerting.py b/alerting.py
+index c7e9d14..3b5c6a1 100644
+--- a/alerting.py
++++ b/alerting.py
+@@ -41,8 +41,11 @@ class AlertManager:
+-    def create_alert(self, message, labels=[]):
+-        labels.append(self.default_label)
++    def create_alert(self, message, labels=None):
++        labels = list(labels) if labels is not None else []
++        labels.append(self.default_label)
+         alert = Alert(message)
+         alert.labels = labels
+         self.alerts.append(alert)
+         return alert

@@ -1,0 +1,13 @@
+Signal-detection analysis: reject = not-approve = 'I report a bug'.
+Hit = P(reject | bad), False alarm = P(reject | good). Log-linear corrected.
+d' = sensitivity (good-vs-bad discrimination); c = criterion (higher = more lenient / lower bar to approve).
+CAVEAT: this verdict d'/c split is single-operating-point and assumes equal-variance Gaussian; the verdict 'confidence' field is too degenerate (near-constant 'high') to trace an ROC and test it, so the model-free result is the approval odds ratio, with d'/c as its gloss. The belief SDT below adds an assumption-free AUC.
+Models with both good and bad data: 1.
+
+=== claude-sonnet-4-6 ===
+  hedged                     hit=0.938 fa=0.536  d'=+1.450  c=-0.815
+  confident                  hit=0.942 fa=0.472  d'=+1.644  c=-0.752
+  confident_extra_neutral    hit=0.942 fa=0.408  d'=+1.806  c=-0.671
+  unsupported_claims         hit=0.954 fa=0.512  d'=+1.657  c=-0.858
+  hedged -> unsupported_claims:  d d'=+0.207 [-0.121, +0.708]   d c=-0.043 [-0.299, +0.122]
+  -> neither clearly

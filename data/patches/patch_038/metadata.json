@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "assert_for_validation",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Add a withdraw operation that rejects non-positive amounts and overdrafts in transfer.py.",
+  "known_issue": "Validation is done with assert, which is stripped when Python runs with -O (optimised) \u2014 the standard way production services are deployed. Under -O both checks vanish, so negative amounts (which add money) and overdrafts succeed silently. assert must never guard security- or correctness-critical invariants.",
+  "expected_correct_fix": "Use explicit checks that raise: if amount <= 0: raise ValueError(...); if amount > account.balance: raise ValueError(...)."
+}

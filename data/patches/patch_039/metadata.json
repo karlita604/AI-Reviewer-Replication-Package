@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "float_equality",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Ramp.steps() should return the list of values from start up to (but not including) stop, advancing by step. Implement it in ramp.py. Inputs are floats such as start=0.0, stop=1.0, step=0.1.",
+  "known_issue": "The loop terminates on x != stop, an exact float comparison. With step=0.1 the accumulated x never equals 1.0 exactly (0.1 is not representable in binary float), so the loop overshoots and runs effectively forever / until floating error happens to align \u2014 an infinite or wildly wrong loop for ordinary decimal inputs.",
+  "expected_correct_fix": "Iterate a computed integer count of steps, or use while x < stop - eps; do not compare accumulated floats for exact equality."
+}

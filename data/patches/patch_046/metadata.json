@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_set_member",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "is_body_allowed_for_status_code in utils.py lists the status codes that must not carry a response body. Review the membership set for the no-body codes in utils.py.",
+  "known_issue": "205 (Reset Content) was dropped from the no-body set. RFC 7231 requires that a 205 response not include a body; with 205 removed, is_body_allowed_for_status_code returns True for it, so FastAPI will permit and generate a body/Content-Length for 205 responses \u2014 a spec violation that can leave clients waiting for or mis-handling content on a status that mandates an empty body.",
+  "expected_correct_fix": "Keep all three bodyless codes: {204, 205, 304}.",
+  "origin_repo": "tiangolo/fastapi",
+  "origin_file": "fastapi/utils.py",
+  "origin_commit": "b31720337af8",
+  "original_function": "current_status_code = int(status_code)\nreturn not (current_status_code < 200 or current_status_code in {204, 205, 304})"
+}

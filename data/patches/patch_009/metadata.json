@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "encoding_error",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "Long bios overflow the profile card layout. Truncate bios to at most 200 characters in profile_card.py.",
+  "known_issue": "The truncation slices the UTF-8 encoded bytes, not characters. This truncates at the wrong unit (200 bytes can be as few as 50 characters), and slicing can cut a multi-byte sequence in half so the decode raises UnicodeDecodeError — crashing the profile page for any user whose bio has a non-ASCII character spanning the 200-byte boundary.",
+  "expected_correct_fix": "Slice the string itself (bio[:200]); if a byte budget is truly required, decode with errors=\"ignore\" after slicing."
+}

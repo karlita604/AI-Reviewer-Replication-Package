@@ -1,0 +1,47 @@
+Phase 11 mitigation analysis (docs/MITIGATION-PLAN.md §6).
+Arms present: A, B, B2, C.  Models: 8.
+Lift L = approval(unsupported_claims) - approval(hedged) on bad patches, pts.
+Verdict SDT (criterion/d' per arm) is computed separately by src/sdt.py.
+
+=== RQ-M1 false-approval lift per arm (bad patches) ===
+  Arm A: mean L = +20.9 pts (per-model +8.8..+43.2)
+  Arm B: mean L = +1.3 pts (per-model -11.6..+15.2)
+  Arm B2: mean L = +2.4 pts (per-model -7.2..+18.8)
+
+=== RQ-M1 condition x arm interaction (A -> B), Holm/8 ===
+  Qwen2.5-14B-Instruct         interaction OR=0.000 [0.000, 0.000]  p=0.0000  p_holm=0.0000
+  Qwen2.5-32B-Instruct         interaction OR=0.395 [0.140, 1.110]  p=0.0781  p_holm=0.0781
+  Qwen2.5-3B-Instruct          interaction OR=0.310 [0.170, 0.567]  p=0.0001  p_holm=0.0006
+  Qwen2.5-72B-Instruct         interaction OR=0.559 [0.329, 0.950]  p=0.0315  p_holm=0.0630
+  Qwen2.5-7B-Instruct          interaction OR=0.196 [0.109, 0.352]  p=0.0000  p_holm=0.0000
+  gemma-2-9b-it                interaction OR=0.536 [0.340, 0.843]  p=0.0070  p_holm=0.0210
+  Llama-3.3-70B-Instruct       interaction OR=0.457 [0.306, 0.682]  p=0.0001  p_holm=0.0006
+  Meta-Llama-3.1-8B-Instruct   interaction OR=0.269 [0.153, 0.470]  p=0.0000  p_holm=0.0000
+  -> interaction significant (Holm) in 6/8 models (OR<1 = claims lift attenuated).
+
+=== RQ-M1 condition x arm interaction (A -> B2), Holm/8 ===
+  Qwen2.5-14B-Instruct         interaction OR=0.000 [nan, nan]  p=nan  p_holm=  n/a
+  Qwen2.5-32B-Instruct         interaction OR=0.491 [0.258, 0.934]  p=0.0302  p_holm=0.0408
+  Qwen2.5-3B-Instruct          interaction OR=0.383 [0.219, 0.671]  p=0.0008  p_holm=0.0032
+  Qwen2.5-72B-Instruct         interaction OR=0.554 [0.337, 0.913]  p=0.0204  p_holm=0.0408
+  Qwen2.5-7B-Instruct          interaction OR=0.247 [0.145, 0.424]  p=0.0000  p_holm=0.0000
+  gemma-2-9b-it                interaction OR=0.529 [0.353, 0.793]  p=0.0021  p_holm=0.0062
+  Llama-3.3-70B-Instruct       interaction OR=0.382 [0.238, 0.613]  p=0.0001  p_holm=0.0003
+  Meta-Llama-3.1-8B-Instruct   interaction OR=0.320 [0.186, 0.553]  p=0.0000  p_holm=0.0003
+  -> interaction significant (Holm) in 7/8 models (OR<1 = claims lift attenuated).
+
+=== RQ-M1 pooled reduction & efficacy label (§6) ===
+  Arm B: mean L_A=+20.9  mean L_B=+1.3  reduction=94% [84%, 104%]
+            L_B pooled CI [-0.9, +3.5] (includes 0: True)  sig 6/8  -> Strong success   [PRIMARY]
+  Arm B2: mean L_A=+20.9  mean L_B2=+2.4  reduction=89% [80%, 97%]
+            L_B2 pooled CI [+0.6, +4.3] (includes 0: False)  sig 7/8  -> Success   [generalisation]
+
+=== RQ-M2 good-patch cost & specificity guard (§6) ===
+  Arm B: good appr 46.8% vs A 65.4%  (Δ=-18.6 pts -> Over-correction (fails cost))
+            specificity: hedged bad appr A=37.8% B=32.6%  drop=+5.1 pts -> FAILS guard (generic strictness)
+  Arm B2: good appr 46.6% vs A 65.4%  (Δ=-18.8 pts -> Over-correction (fails cost))
+            specificity: hedged bad appr A=37.8% B2=29.2%  drop=+8.5 pts -> FAILS guard (generic strictness)
+
+=== RQ-M3 diff-only ceiling (Arm C vs Arm A hedged) ===
+  bad appr C=40.6%  vs  A hedged=37.8%  (gap +2.9 pts [+0.4, +5.3], C > A hedged)
+  good appr C=61.1%  vs  A hedged=55.6%  (gap +5.5 pts [+2.2, +8.9])  -> Unexpected (description was protective)

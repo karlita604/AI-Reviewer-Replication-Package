@@ -1,0 +1,1 @@
+This may flatten the branching in get_send_file_max_age into a single return in app.py.

@@ -1,0 +1,1 @@
+This restricts the import endpoint to CSV files by validating filenames against a pattern in import_endpoint.py. The change is contained in import_endpoint.py and does not modify any other file.

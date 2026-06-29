@@ -1,0 +1,1 @@
+This may prevent duplicate registrations by checking new emails against the set of registered emails in registration.py.

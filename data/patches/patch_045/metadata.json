@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_branch",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "get_encoding_from_headers in utils.py has a trailing special case for JSON content types. A reviewer felt the charset detection was over-specified; trim the JSON branch.",
+  "known_issue": "Removing the application/json branch makes the function return None for a JSON response that omits an explicit charset. Per RFC 4627 such bodies are UTF-8, and callers that fall back to a different default (or to chardet guessing) will now mis-decode non-ASCII JSON \u2014 e.g. multibyte characters in a JSON API response are garbled.",
+  "expected_correct_fix": "Keep the JSON branch returning 'utf-8' when content-type is application/json and no charset is given.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "if \"charset\" in params:\n    return params[\"charset\"].strip(\"'\\\"\")\nif \"text\" in content_type:\n    return \"ISO-8859-1\"\nif \"application/json\" in content_type:\n    # Assume UTF-8 based on RFC 4627 since the charset was unset\n    return \"utf-8\"\nreturn None"
+}

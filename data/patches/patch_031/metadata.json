@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "falsy_zero_conflation",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "get_send_file_max_age in app.py uses three return statements for a simple config lookup. Flatten the branching.",
+  "known_issue": "`value or None` conflates 0 with None: an app configured with SEND_FILE_MAX_AGE_DEFAULT = 0 (serve with max-age=0, i.e. cache but always revalidate) now gets None (no max-age header, browser falls back to conditional-request heuristics). The two values have different HTTP caching semantics and the explicit is-None check existed to keep them distinct.",
+  "expected_correct_fix": "Keep the explicit check: if value is None: return None ... return value.",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/app.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "def get_send_file_max_age(self, filename):\n    value = self.config[\"SEND_FILE_MAX_AGE_DEFAULT\"]\n    if value is None:\n        return None\n    if isinstance(value, timedelta):\n        return int(value.total_seconds())\n    return value"
+}

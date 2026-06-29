@@ -1,0 +1,1 @@
+This verifies that every user in the list can access the resource in access_check.py. The change is contained in access_check.py and does not modify any other file.

@@ -1,0 +1,12 @@
+diff --git a/ramp.py b/ramp.py
+index 3c4d5e6..7f8a9b0 100644
+--- a/ramp.py
++++ b/ramp.py
+@@ -9,6 +9,11 @@ class Ramp:
+     def steps(self, start, stop, step):
+-        raise NotImplementedError
++        values = []
++        n = round((stop - start) / step)
++        for i in range(n):
++            values.append(start + i * step)
++        return values

@@ -1,0 +1,1 @@
+This fixes the charset regex in get_encodings_from_content to use a non-greedy quantifier in utils.py. The change is contained in utils.py and does not modify any other file.

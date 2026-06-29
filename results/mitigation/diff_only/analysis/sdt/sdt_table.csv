@@ -1,0 +1,9 @@
+model,condition,hit_rate,fa_rate,d_prime,criterion
+Qwen/Qwen2.5-14B-Instruct,hedged,0.8665,0.7191,0.5299,-0.8452
+Qwen/Qwen2.5-32B-Instruct,hedged,0.8506,0.6315,0.7032,-0.6874
+Qwen/Qwen2.5-3B-Instruct,hedged,0.7191,0.6434,0.2126,-0.4739
+Qwen/Qwen2.5-72B-Instruct,hedged,0.6873,0.1853,1.3836,0.2037
+Qwen/Qwen2.5-7B-Instruct,hedged,0.4442,0.3526,0.2381,0.2593
+google/gemma-2-9b-it,hedged,0.2649,0.1932,0.2379,0.7471
+meta-llama/Llama-3.3-70B-Instruct,hedged,0.5438,0.1574,1.1154,0.4476
+meta-llama/Meta-Llama-3.1-8B-Instruct,hedged,0.3725,0.2331,0.4036,0.527

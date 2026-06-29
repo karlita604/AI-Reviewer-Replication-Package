@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "The regex in get_path_param_names (utils.py) uses a non-greedy quantifier. Review suggested the simpler greedy form reads more clearly; apply that change.",
+  "paired_patch": "patch_027",
+  "bug_type": "greedy_regex",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "The non-greedy `{(.*?)}` stops at the first closing brace, so each `{\u2026}` group in the path is captured as a separate parameter name. A route with two or more parameters yields the correct set of names instead of one malformed token spanning the whole path.",
+  "origin_repo": "tiangolo/fastapi",
+  "origin_file": "fastapi/utils.py",
+  "origin_commit": "b31720337af8",
+  "original_function": "def get_path_param_names(path: str) -> set[str]:\n    return set(re.findall(\"{(.*?)}\", path))"
+}

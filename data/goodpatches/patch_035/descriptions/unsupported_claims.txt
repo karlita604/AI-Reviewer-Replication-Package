@@ -1,0 +1,1 @@
+This fixes the cookie insertion condition in cookiejar_from_dict to respect the overwrite parameter in cookies.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

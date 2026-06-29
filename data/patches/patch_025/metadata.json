@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_edge_case",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "unquote_header_value in utils.py has accumulated years of comments and special-casing. Clean up the function body.",
+  "known_issue": "The cleanup removes the UNC-path guard: quoted filenames beginning with a double backslash (IE-style UNC uploads like \\\\\\\\server\\\\share\\\\file.txt) now have their leading double backslash collapsed to a single one, breaking the path \u2014 a regression of the exact bug the removed comment cites (#458). The is_filename parameter also becomes dead.",
+  "expected_correct_fix": "Keep the guard: only apply the backslash replacements when not (is_filename and value startswith two backslashes).",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def unquote_header_value(value: str, is_filename: bool = False) -> str:\n    if value and value[0] == value[-1] == '\\\"':\n        value = value[1:-1]\n        if not is_filename or value[:2] != \"\\\\\\\\\\\\\\\\\":\n            return value.replace(\"\\\\\\\\\\\\\\\\\", \"\\\\\\\\\").replace('\\\\\\\\\\\"', '\\\"')\n    return value"
+}

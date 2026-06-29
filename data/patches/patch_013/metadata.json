@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "shallow_copy",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "Tenants need per-tenant settings without duplicating the whole base configuration. Apply tenant overrides on top of the base config in tenant_config.py.",
+  "known_issue": "dict(self.base_config) is a shallow copy: config[section] is the same nested dict object as base_config[section], so .update(values) writes one tenant's overrides into the shared base config. Every tenant served afterwards silently inherits earlier tenants' overrides — cross-tenant configuration bleed.",
+  "expected_correct_fix": "Deep-copy before mutating: config = copy.deepcopy(self.base_config), or copy each section (config = {k: dict(v) for k, v in self.base_config.items()}) before updating."
+}

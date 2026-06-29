@@ -1,0 +1,13 @@
+diff --git a/session_registry.py b/session_registry.py
+index 8f4a2b3..d19e6c7 100644
+--- a/session_registry.py
++++ b/session_registry.py
+@@ -27,3 +27,9 @@ class SessionRegistry:
+     def count(self):
+         return len(self.sessions)
++
++    def purge_expired(self, now):
++        """Remove sessions past their expiry time."""
++        for sid, session in self.sessions.items():
++            if session.expires_at < now:
++                del self.sessions[sid]

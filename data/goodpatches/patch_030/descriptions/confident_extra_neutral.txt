@@ -1,0 +1,1 @@
+This refactors parse_list_header to use a list comprehension over urllib3's parsed items in utils.py. The change is contained in utils.py and does not modify any other file.

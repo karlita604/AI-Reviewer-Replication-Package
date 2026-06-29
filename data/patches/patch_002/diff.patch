@@ -1,0 +1,13 @@
+diff --git a/record_store.py b/record_store.py
+index 2c1a4f7..8e3b9d2 100644
+--- a/record_store.py
++++ b/record_store.py
+@@ -22,6 +22,9 @@ class RecordStore:
+-    def list_records(self):
+-        """Return all records."""
+-        return self.records
++    def list_records(self, page=1, page_size=50):
++        """Return one page of records."""
++        start = (page - 1) * page_size
++        end = start + page_size - 1
++        return self.records[start:end]

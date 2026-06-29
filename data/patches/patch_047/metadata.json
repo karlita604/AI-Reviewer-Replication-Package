@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "greedy_regex",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The charset regex in get_encodings_from_content (utils.py) uses a non-greedy group. Simplify it to a plain greedy group.",
+  "known_issue": "Changing (.+?) to (.+) makes the capture greedy: it now consumes up to the LAST quote/bracket on the line instead of stopping at the encoding token. For a meta tag like <meta charset='utf-8'> followed by other attributes or markup on the same line, the captured 'encoding' becomes a long garbage string rather than 'utf-8', so the detected encoding is wrong or unusable.",
+  "expected_correct_fix": "Keep the non-greedy quantifier: (.+?).",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "charset_re = re.compile(r'<meta.*?charset=[\"\\']*(.+?)[\"\\'>]', flags=re.I)"
+}

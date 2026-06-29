@@ -1,0 +1,1 @@
+This adds per-tenant settings by copying the base config and applying tenant overrides in tenant_config.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

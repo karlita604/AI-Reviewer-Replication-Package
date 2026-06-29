@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "A transient outage of the metrics backend currently crashes the request handler mid-request. Make MetricsBuffer.flush() resilient so an unavailable backend does not take down request handling.",
+  "paired_patch": "patch_004",
+  "bug_type": "exception_swallowing",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The specific ConnectionError is caught rather than the broad Exception, so programming errors (AttributeError, TypeError) are not silently swallowed. The buffer is cleared only on a successful send; on failure a warning is logged and the buffer is retained for the next flush attempt."
+}

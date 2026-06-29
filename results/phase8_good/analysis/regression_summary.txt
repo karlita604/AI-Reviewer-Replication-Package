@@ -1,0 +1,45 @@
+Primary inference: GEE logistic regression, patch-clustered (population-averaged ORs).
+Sensitivity: conditional (patch-stratified) logit - direction only; magnitudes quasi-separated.
+Reference condition: hedged.
+Approval-only mode: good patches have no planted bug; detection outcome skipped.
+
+=== Outcome: approved ===
+Qwen2.5-14B-Instruct         cond[confident]                 OR=1.29 [0.89, 1.87]  p=0.1782  p_holm=0.7128  (cond.logit p=0.0592)
+Qwen2.5-14B-Instruct         cond[confident_extra_neutral]   OR=1.33 [0.80, 2.20]  p=0.2712  p_holm=0.7128  (cond.logit p=0.0373)
+Qwen2.5-14B-Instruct         cond[unsupported_claims]        OR=2.93 [1.45, 5.89]  p=0.0026  p_holm=0.0214  (cond.logit p=0.0000)
+Qwen2.5-32B-Instruct         cond[confident]                 OR=1.60 [1.17, 2.17]  p=0.0029  p_holm=0.0214  (cond.logit p=0.0000)
+Qwen2.5-32B-Instruct         cond[confident_extra_neutral]   OR=1.00 [0.87, 1.15]  p=1.0000  p_holm=1.0000  (cond.logit p=0.9981)
+Qwen2.5-32B-Instruct         cond[unsupported_claims]        OR=3.05 [1.87, 4.95]  p=0.0000  p_holm=0.0001  (cond.logit p=0.0000)
+Qwen2.5-3B-Instruct          cond[confident]                 OR=2.14 [1.41, 3.24]  p=0.0003  p_holm=0.0042  (cond.logit p=0.0000)
+Qwen2.5-3B-Instruct          cond[confident_extra_neutral]   OR=3.05 [1.89, 4.90]  p=0.0000  p_holm=0.0001  (cond.logit p=0.0000)
+Qwen2.5-3B-Instruct          cond[unsupported_claims]        OR=5.77 [3.27, 10.17]  p=0.0000  p_holm=0.0000  (cond.logit p=0.0000)
+Qwen2.5-7B-Instruct          cond[confident]                 OR=1.90 [1.33, 2.70]  p=0.0004  p_holm=0.0044  (cond.logit p=0.0000)
+Qwen2.5-7B-Instruct          cond[confident_extra_neutral]   OR=3.40 [1.93, 5.99]  p=0.0000  p_holm=0.0003  (cond.logit p=0.0000)
+Qwen2.5-7B-Instruct          cond[unsupported_claims]        OR=2.60 [1.63, 4.16]  p=0.0001  p_holm=0.0009  (cond.logit p=0.0000)
+gemma-2-9b-it                cond[confident]                 OR=1.35 [1.00, 1.81]  p=0.0489  p_holm=0.2443  (cond.logit p=0.0215)
+gemma-2-9b-it                cond[confident_extra_neutral]   OR=2.00 [1.25, 3.21]  p=0.0040  p_holm=0.0238  (cond.logit p=0.0000)
+gemma-2-9b-it                cond[unsupported_claims]        OR=2.38 [1.42, 4.00]  p=0.0011  p_holm=0.0106  (cond.logit p=0.0000)
+Meta-Llama-3.1-8B-Instruct   cond[confident]                 OR=1.28 [0.89, 1.85]  p=0.1865  p_holm=0.7128  (cond.logit p=0.1002)
+Meta-Llama-3.1-8B-Instruct   cond[confident_extra_neutral]   OR=3.32 [1.53, 7.20]  p=0.0024  p_holm=0.0214  (cond.logit p=0.0000)
+Meta-Llama-3.1-8B-Instruct   cond[unsupported_claims]        OR=3.96 [1.84, 8.49]  p=0.0004  p_holm=0.0045  (cond.logit p=0.0000)
+
+=== Moderators of the claims effect (hedged vs unsupported_claims, approval) ===
+(bug_type not testable: 47 types / 50 patches, confounded with patch identity)
+Qwen2.5-14B-Instruct         claims x difficulty       interaction OR=1.38 [0.34, 5.61]  p=0.6569  p_holm=1.0000
+Qwen2.5-32B-Instruct         claims x difficulty       interaction OR=1.69 [0.65, 4.34]  p=0.2794  p_holm=1.0000
+Qwen2.5-3B-Instruct          claims x difficulty       interaction OR=0.65 [0.23, 1.88]  p=0.4267  p_holm=1.0000
+Qwen2.5-7B-Instruct          claims x difficulty       interaction OR=0.86 [0.35, 2.15]  p=0.7532  p_holm=1.0000
+gemma-2-9b-it                claims x difficulty       interaction OR=0.90 [0.35, 2.31]  p=0.8312  p_holm=1.0000
+Meta-Llama-3.1-8B-Instruct   claims x difficulty       interaction OR=0.35 [0.11, 1.12]  p=0.0769  p_holm=1.0000
+Qwen2.5-14B-Instruct         claims x source_injected  interaction OR=0.62 [0.05, 7.15]  p=0.7017  p_holm=1.0000
+Qwen2.5-32B-Instruct         claims x source_injected  interaction OR=0.44 [0.17, 1.15]  p=0.0947  p_holm=1.0000
+Qwen2.5-3B-Instruct          claims x source_injected  interaction OR=0.33 [0.09, 1.19]  p=0.0898  p_holm=1.0000
+Qwen2.5-7B-Instruct          claims x source_injected  interaction OR=0.60 [0.19, 1.86]  p=0.3762  p_holm=1.0000
+gemma-2-9b-it                claims x source_injected  interaction OR=0.08 [0.02, 0.28]  p=0.0001  p_holm=0.0012
+Meta-Llama-3.1-8B-Instruct   claims x source_injected  interaction OR=0.17 [0.04, 0.67]  p=0.0115  p_holm=0.1951
+Qwen2.5-14B-Instruct         claims x diff_lines_z     interaction OR=0.68 [0.37, 1.24]  p=0.2090  p_holm=1.0000
+Qwen2.5-32B-Instruct         claims x diff_lines_z     interaction OR=0.63 [0.41, 0.96]  p=0.0336  p_holm=0.5040
+Qwen2.5-3B-Instruct          claims x diff_lines_z     interaction OR=1.08 [0.58, 2.01]  p=0.8182  p_holm=1.0000
+Qwen2.5-7B-Instruct          claims x diff_lines_z     interaction OR=1.37 [0.88, 2.14]  p=0.1676  p_holm=1.0000
+gemma-2-9b-it                claims x diff_lines_z     interaction OR=1.81 [1.07, 3.05]  p=0.0258  p_holm=0.4124
+Meta-Llama-3.1-8B-Instruct   claims x diff_lines_z     interaction OR=1.09 [0.54, 2.17]  p=0.8120  p_holm=1.0000

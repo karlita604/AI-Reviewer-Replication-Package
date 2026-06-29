@@ -1,0 +1,1 @@
+This refactors format_filename to use an early return for the bytes branch in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

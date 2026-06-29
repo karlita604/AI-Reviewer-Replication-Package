@@ -1,0 +1,1 @@
+This flattens the branching in get_send_file_max_age into a single return in app.py. The change is contained in app.py and does not modify any other file.

@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "no_op_implementation",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "unstyle in termui.py delegates to strip_ansi. A reviewer noted the indirection; inline the behaviour directly.",
+  "known_issue": "Returning text unchanged does not inline strip_ansi at all \u2014 it removes the ANSI-stripping entirely. unstyle() now returns the raw styled text including escape sequences, so any caller relying on it (e.g. computing display width, writing plain logs) gets control characters back.",
+  "expected_correct_fix": "Actually inline the call, i.e. return strip_ansi(text) (or its body), not the unmodified text.",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/termui.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "def unstyle(text: str) -> str:\n    \"\"\"Removes ANSI styling information from a string.\"\"\"\n    return strip_ansi(text)"
+}

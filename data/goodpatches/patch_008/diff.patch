@@ -1,0 +1,22 @@
+diff --git a/authz.py b/authz.py
+index b4c8e72..d5e6f71 100644
+--- a/authz.py
++++ b/authz.py
+@@ -1,3 +1,4 @@
++import time
+@@ -9,10 +10,17 @@ class Authorizer:
+     def __init__(self, db):
+         self.db = db
++        self._cache = {}
++        self._CACHE_TTL = 60
+ 
+     def has_permission(self, user_id, action):
+-        perms = self._load_permissions(user_id)
++        entry = self._cache.get(user_id)
++        now = time.monotonic()
++        if entry is None or now - entry[1] > self._CACHE_TTL:
++            perms = self._load_permissions(user_id)
++            self._cache[user_id] = (perms, now)
++        else:
++            perms = entry[0]
+         return action in perms

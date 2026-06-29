@@ -1,0 +1,8 @@
+diff --git a/src/click/utils.py b/src/click/utils.py
+index 8a1b1a3..d4f8b22 100644
+--- a/src/click/utils.py
++++ b/src/click/utils.py
+@@ -30,4 +30,4 @@
+ def _posixify(name: str) -> str:
+-    return "-".join(name.split()).lower()
++    return name.replace(" ", "-").lower()

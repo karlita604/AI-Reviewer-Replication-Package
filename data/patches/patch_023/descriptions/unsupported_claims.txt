@@ -1,0 +1,1 @@
+This replaces the manual position loop in iter_slices with a range-based loop in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

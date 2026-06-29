@@ -1,0 +1,1 @@
+This may restructure the cookie refresh condition in should_set_cookie for readability in sessions.py.

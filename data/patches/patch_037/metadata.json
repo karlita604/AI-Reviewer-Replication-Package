@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "path_traversal",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "Users can request files from their personal upload directory by name. Implement FileDownload.read() to return the contents of the named file under the user's base directory in file_download.py.",
+  "known_issue": "filename is attacker-controlled and unsanitised. os.path.join(base, '../../etc/passwd') resolves outside base_dir (and an absolute path like '/etc/passwd' makes os.path.join discard base_dir entirely), so a crafted name reads arbitrary files on the host \u2014 a directory-traversal vulnerability.",
+  "expected_correct_fix": "Resolve and confirm containment: full = os.path.realpath(os.path.join(base_dir, filename)); reject unless full starts with os.path.realpath(base_dir) + os.sep. Reject absolute paths and '..' components."
+}

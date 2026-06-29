@@ -1,0 +1,1 @@
+This restructures the cookie refresh condition in should_set_cookie for readability in sessions.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,13 @@
+diff --git a/file_download.py b/file_download.py
+index 1a2b3c4..5d6e7f8 100644
+--- a/file_download.py
++++ b/file_download.py
+@@ -8,6 +8,12 @@ class FileDownload:
+     def read(self, filename):
+-        raise NotImplementedError
++        base = os.path.realpath(self.base_dir)
++        path = os.path.realpath(os.path.join(self.base_dir, filename))
++        if not path.startswith(base + os.sep):
++            raise PermissionError("access denied")
++        with open(path, "rb") as f:
++            return f.read()

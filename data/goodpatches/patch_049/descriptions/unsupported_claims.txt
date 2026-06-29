@@ -1,0 +1,1 @@
+This rewrites the whitespace-to-dash conversion in _posixify to collapse all whitespace using split and join in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,1 @@
+This tidies the return expression in get_cookie_path in sessions.py. The change is contained in sessions.py and does not modify any other file.

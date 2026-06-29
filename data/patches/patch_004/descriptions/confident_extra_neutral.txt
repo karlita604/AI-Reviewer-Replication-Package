@@ -1,0 +1,1 @@
+This keeps the request handler alive during backend outages by handling errors from the metrics send in metrics_buffer.py. The change is contained in metrics_buffer.py and does not modify any other file.

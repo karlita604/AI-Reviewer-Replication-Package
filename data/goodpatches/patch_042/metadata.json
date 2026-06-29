@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "AccessCheck.all_allowed() should return True only if every user in the list can access the resource in access_check.py.",
+  "paired_patch": "patch_042",
+  "bug_type": "early_return_in_loop",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Returning `False` on the first denied user and `True` only after the loop completes means every user is actually checked. A group where a later member lacks access correctly returns False even if the first member is permitted."
+}

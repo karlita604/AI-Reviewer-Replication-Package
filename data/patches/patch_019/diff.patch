@@ -1,0 +1,9 @@
+diff --git a/billing.py b/billing.py
+index a4e2c81..7d9f3b6 100644
+--- a/billing.py
++++ b/billing.py
+@@ -52,4 +52,5 @@ class BillingSchedule:
+     def next_renewal(self, last):
+-        raise NotImplementedError
++        """Renewals are monthly."""
++        return last.replace(month=last.month + 1)

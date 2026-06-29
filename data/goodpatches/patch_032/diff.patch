@@ -1,0 +1,16 @@
+diff --git a/src/click/utils.py b/src/click/utils.py
+index 8a1b1a3..e94c7d2 100644
+--- a/src/click/utils.py
++++ b/src/click/utils.py
+@@ -496,11 +496,8 @@ def get_app_dir(app_name: str, roaming: bool = True, force_posix: bool = False) -> str:
+     """
+     if WIN:
+         key = "APPDATA" if roaming else "LOCALAPPDATA"
+-        folder = os.environ.get(key)
+-        if folder is None:
+-            folder = os.path.expanduser("~")
+-        return os.path.join(folder, app_name)
++        folder = os.environ.get(key) or os.path.expanduser("~")
++        return os.path.join(folder, app_name)
+     if force_posix:
+         return os.path.join(os.path.expanduser(f"~/.{_posixify(app_name)}"))

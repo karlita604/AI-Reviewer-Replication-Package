@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "race_condition",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "Counter values are coming out lower than the true event counts when worker threads run concurrently. Make MetricsCounter.increment() safe to call from multiple threads.",
+  "known_issue": "The key-existence check and zero-initialisation happen outside the lock. Thread A and B can both observe a missing key; B can then reset counts[name] = 0 after A has already incremented it inside the lock, losing updates — the exact symptom the patch claims to fix.",
+  "expected_correct_fix": "Do the entire read-modify-write under the lock, e.g. move the initialisation inside the `with self.lock:` block (or use counts.get(name, 0) + 1 under the lock)."
+}

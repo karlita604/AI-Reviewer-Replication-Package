@@ -1,0 +1,1 @@
+This restores the scalar-type guard in to_key_val_list in utils.py. The change is contained in utils.py and does not modify any other file.

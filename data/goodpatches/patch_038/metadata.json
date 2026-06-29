@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Add a withdraw operation that rejects non-positive amounts and overdrafts in transfer.py.",
+  "paired_patch": "patch_038",
+  "bug_type": "assert_for_validation",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Explicit `if`/`raise ValueError(...)` checks run under any Python flags, including `-O` (optimised mode). Non-positive amounts and overdrafts are always rejected before the balance is mutated, regardless of how the interpreter was launched."
+}

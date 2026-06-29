@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "off_by_one",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "iter_slices in utils.py uses a manual position counter and while loop. Replace it with a range-based loop.",
+  "known_issue": "The range stop is len(string) - slice_length instead of len(string), so the final slice (or slices) is never yielded: a 10-byte string with slice_length 4 yields only [0:4] and [4:8], dropping the tail, and a string of exactly one slice_length yields nothing at all \u2014 silently truncated request bodies.",
+  "expected_correct_fix": "range(0, len(string), slice_length) \u2014 the slice expression already handles the short final chunk.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def iter_slices(string, slice_length):\n    \"\"\"Iterate over slices of a string.\"\"\"\n    pos = 0\n    if slice_length is None or slice_length <= 0:\n        slice_length = len(string)\n    while pos < len(string):\n        yield string[pos : pos + slice_length]\n        pos += slice_length"
+}

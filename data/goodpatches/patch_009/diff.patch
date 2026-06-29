@@ -1,0 +1,8 @@
+diff --git a/profile_card.py b/profile_card.py
+index 6d2f8a1..a3b4c51 100644
+--- a/profile_card.py
++++ b/profile_card.py
+@@ -18,6 +18,7 @@ class ProfileCard:
+     def card_bio(self, bio):
+-        return bio
++        return bio[:200]

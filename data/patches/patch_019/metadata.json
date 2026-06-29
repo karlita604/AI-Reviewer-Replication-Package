@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "date_arithmetic",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Subscriptions renew monthly. Compute the next renewal date from the last renewal date in billing.py.",
+  "known_issue": "last.replace(month=last.month + 1) raises ValueError for every December renewal (month=13) and for day overflow (Jan 31 -> Feb 31), so billing crashes for a predictable subset of subscribers every month and for everyone each December.",
+  "expected_correct_fix": "Wrap the year and clamp the day, e.g. dateutil.relativedelta(months=1), or compute year/month manually and clamp day to calendar.monthrange."
+}

@@ -1,0 +1,24 @@
+
+=== Qwen2.5-72B-Instruct ===
+Patches majority-rejected under hedged: 39; of these, 9 flip to majority-approval under claims.
+Patches with at least one vague hedged rejection: 7.
+
+                        did not flip   flipped
+no vague hedged rej.          27           5
+some vague hedged rej.         3           4
+
+Mean share of hedged rejections that were vague: flipping patches 15.6% vs non-flipping 2.7%.
+Fisher's exact (any vague x flipped): odds ratio 7.20, p = 0.0370.
+Mann-Whitney on vague share (flip vs stay): p = 0.0155.
+
+=== Llama-3.3-70B-Instruct ===
+Patches majority-rejected under hedged: 23; of these, 8 flip to majority-approval under claims.
+Patches with at least one vague hedged rejection: 3.
+
+                        did not flip   flipped
+no vague hedged rej.          15           5
+some vague hedged rej.         0           3
+
+Mean share of hedged rejections that were vague: flipping patches 37.5% vs non-flipping 0.0%.
+Fisher's exact (any vague x flipped): odds ratio inf, p = 0.0316.
+Mann-Whitney on vague share (flip vs stay): p = 0.0150.

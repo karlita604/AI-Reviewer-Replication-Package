@@ -1,0 +1,9 @@
+model,d_prime_hedged,d_prime_claims,delta_d_prime,delta_d_lo,delta_d_hi,criterion_hedged,criterion_claims,delta_criterion,delta_c_lo,delta_c_hi,reading
+Qwen/Qwen2.5-14B-Instruct,0.469,0.0,-0.469,-1.3392,0.0,-1.9643,-2.8794,-0.9151,-1.3551,0.0,neither clearly
+Qwen/Qwen2.5-32B-Instruct,0.7919,0.6783,-0.1136,-0.9236,0.2812,-1.1778,-1.2346,-0.0568,-0.4419,0.4264,neither clearly
+Qwen/Qwen2.5-3B-Instruct,-0.2072,-0.1453,0.0619,-0.2091,0.3354,-0.7197,-0.2737,0.446,0.2796,0.6603,criterion shift (lower bar)
+Qwen/Qwen2.5-72B-Instruct,1.2954,1.1834,-0.112,-0.3405,0.0626,-0.2478,-0.1371,0.1107,-0.0197,0.2816,neither clearly
+Qwen/Qwen2.5-7B-Instruct,0.2734,0.1383,-0.135,-0.4466,0.1664,-0.1467,-0.5349,-0.3882,-0.5964,-0.1981,neither clearly
+google/gemma-2-9b-it,0.2563,0.2794,0.0231,-0.169,0.2326,0.4639,0.7558,0.2919,0.0936,0.52,criterion shift (lower bar)
+meta-llama/Llama-3.3-70B-Instruct,0.6819,0.8507,0.1688,0.0001,0.3738,0.441,0.4553,0.0144,-0.1,0.1348,neither clearly
+meta-llama/Meta-Llama-3.1-8B-Instruct,0.3299,0.13,-0.1999,-0.3911,-0.0337,0.2349,0.035,-0.1999,-0.3921,-0.029,sensitivity loss (blinding)

@@ -1,0 +1,53 @@
+Signal-detection analysis: reject = not-approve = 'I report a bug'.
+Hit = P(reject | bad), False alarm = P(reject | good). Log-linear corrected.
+d' = sensitivity (good-vs-bad discrimination); c = criterion (higher = more lenient / lower bar to approve).
+CAVEAT: this verdict d'/c split is single-operating-point and assumes equal-variance Gaussian; the verdict 'confidence' field is too degenerate (near-constant 'high') to trace an ROC and test it, so the model-free result is the approval odds ratio, with d'/c as its gloss. The belief SDT below adds an assumption-free AUC.
+Models with both good and bad data: 8.
+
+=== Qwen2.5-14B-Instruct ===
+  hedged                     hit=0.962 fa=0.914  d'=+0.408  c=-1.572
+  unsupported_claims         hit=0.998 fa=0.974  d'=+0.935  c=-2.412
+  hedged -> unsupported_claims:  d d'=+0.526 [-0.641, +1.026]   d c=-0.840 [-1.303, -0.184]
+  -> neither clearly
+
+=== Qwen2.5-32B-Instruct ===
+  hedged                     hit=0.926 fa=0.711  d'=+0.892  c=-1.003
+  unsupported_claims         hit=0.910 fa=0.691  d'=+0.844  c=-0.921
+  hedged -> unsupported_claims:  d d'=-0.048 [-0.306, +0.215]   d c=+0.082 [-0.051, +0.220]
+  -> neither clearly
+
+=== Qwen2.5-3B-Instruct ===
+  hedged                     hit=0.779 fa=0.799  d'=-0.069  c=-0.803
+  unsupported_claims         hit=0.592 fa=0.655  d'=-0.168  c=-0.316
+  hedged -> unsupported_claims:  d d'=-0.099 [-0.366, +0.169]   d c=+0.487 [+0.333, +0.689]
+  -> criterion shift (lower bar)
+
+=== Qwen2.5-72B-Instruct ===
+  hedged                     hit=0.807 fa=0.329  d'=+1.310  c=-0.211
+  unsupported_claims         hit=0.759 fa=0.317  d'=+1.180  c=-0.113
+  hedged -> unsupported_claims:  d d'=-0.130 [-0.334, +0.026]   d c=+0.098 [-0.040, +0.272]
+  -> neither clearly
+
+=== Qwen2.5-7B-Instruct ===
+  hedged                     hit=0.683 fa=0.560  d'=+0.326  c=-0.314
+  unsupported_claims         hit=0.743 fa=0.624  d'=+0.338  c=-0.484
+  hedged -> unsupported_claims:  d d'=+0.012 [-0.175, +0.192]   d c=-0.170 [-0.345, -0.011]
+  -> neither clearly
+
+=== gemma-2-9b-it ===
+  hedged                     hit=0.416 fa=0.321  d'=+0.254  c=+0.338
+  unsupported_claims         hit=0.313 fa=0.237  d'=+0.228  c=+0.602
+  hedged -> unsupported_claims:  d d'=-0.027 [-0.243, +0.192]   d c=+0.263 [+0.095, +0.453]
+  -> criterion shift (lower bar)
+
+=== Llama-3.3-70B-Instruct ===
+  hedged                     hit=0.516 fa=0.213  d'=+0.836  c=+0.378
+  unsupported_claims         hit=0.588 fa=0.257  d'=+0.874  c=+0.216
+  hedged -> unsupported_claims:  d d'=+0.039 [-0.184, +0.270]   d c=-0.162 [-0.317, -0.036]
+  -> neither clearly
+
+=== Meta-Llama-3.1-8B-Instruct ===
+  hedged                     hit=0.564 fa=0.464  d'=+0.250  c=-0.035
+  unsupported_claims         hit=0.560 fa=0.472  d'=+0.220  c=-0.040
+  hedged -> unsupported_claims:  d d'=-0.030 [-0.153, +0.101]   d c=-0.005 [-0.116, +0.107]
+  -> neither clearly

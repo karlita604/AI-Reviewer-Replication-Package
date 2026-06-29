@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Clients are hammering the API far beyond the agreed quota. Enforce a per-client request limit per 60-second window in rate_limiter.py.",
+  "paired_patch": "patch_016",
+  "bug_type": "lost_update",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "After appending the current timestamp, `self.windows[key] = window` persists the updated list back into the instance dict. Subsequent calls retrieve the accumulated timestamps and correctly enforce the limit over the 60-second sliding window."
+}

@@ -1,0 +1,1 @@
+This purges expired sessions by removing entries past their expiry time in session_registry.py.

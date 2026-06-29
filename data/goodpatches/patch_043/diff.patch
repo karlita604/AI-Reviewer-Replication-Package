@@ -1,0 +1,9 @@
+diff --git a/api_guard.py b/api_guard.py
+index 7a8b9c0..1d2e3f4 100644
+--- a/api_guard.py
++++ b/api_guard.py
+@@ -12,5 +12,7 @@ class ApiGuard:
+     def can_delete(self, user, record):
+-        raise NotImplementedError
++        # only the owner, or an admin, may delete a deletable record
++        return record.deletable and (user.is_admin or user.id == record.owner_id)

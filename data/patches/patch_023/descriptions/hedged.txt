@@ -1,0 +1,1 @@
+This may replace the manual position loop in iter_slices with a range-based loop in utils.py.

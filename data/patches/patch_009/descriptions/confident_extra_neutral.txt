@@ -1,0 +1,1 @@
+This trims long bios to the 200-character limit before rendering the profile card in profile_card.py. The change is contained in profile_card.py and does not modify any other file.

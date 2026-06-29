@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Transient 5xx errors from the payments API cause one-off charge failures. Add retry with backoff to PaymentsClient.charge() so transient errors are retried up to 3 times before failing.",
+  "paired_patch": "patch_006",
+  "bug_type": "silent_failure",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`range(3)` yields 0, 1, 2; `attempt == 2` correctly identifies the final attempt. On the third failure the exception is re-raised so callers detect the failure. On attempts 0 and 1 the error is caught and exponential backoff is applied before the next try."
+}

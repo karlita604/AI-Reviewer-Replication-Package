@@ -1,0 +1,1 @@
+This inlines the strip_ansi call directly into unstyle in termui.py. The change is contained in termui.py and does not modify any other file.

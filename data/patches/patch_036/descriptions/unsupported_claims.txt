@@ -1,0 +1,1 @@
+This simplifies simplifies the scheme assignment in prepend_scheme_if_needed in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

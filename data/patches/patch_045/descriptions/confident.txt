@@ -1,0 +1,1 @@
+This trims the JSON charset branch from get_encoding_from_headers in utils.py.

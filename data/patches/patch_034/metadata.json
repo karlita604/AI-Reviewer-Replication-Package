@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "error_masking",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "The import error handling in locate_app (cli.py) inspects traceback internals. Streamline it to a simple raise-or-return.",
+  "known_issue": "The removed tb_next check distinguished 'the module does not exist' from 'the module exists but itself raised ImportError' (e.g. the user's app imports a missing dependency). Now the second case is reported as Could not import 'app' \u2014 hiding the real traceback \u2014 and with raise_if_not_found=False it silently returns None, so a broken app is treated as no app at all.",
+  "expected_correct_fix": "Keep the tb_next depth check and the detailed NoAppException carrying traceback.format_exc() for ImportErrors raised within the imported module.",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/cli.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "try:\n    __import__(module_name)\nexcept ImportError:\n    # Reraise the ImportError if it occurred within the imported module.\n    # Determine this by checking whether the trace has a depth > 1.\n    if sys.exc_info()[2].tb_next:\n        raise NoAppException(\n            f\"While importing {module_name!r}, an ImportError was\"\n            f\" raised:\\n\\n{traceback.format_exc()}\"\n        ) from None\n    elif raise_if_not_found:\n        raise NoAppException(f\"Could not import {module_name!r}.\") from None\n    else:\n        return None"
+}

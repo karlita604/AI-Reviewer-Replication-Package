@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Counter values are coming out lower than the true event counts when worker threads run concurrently. Make MetricsCounter.increment() safe to call from multiple threads.",
+  "paired_patch": "patch_003",
+  "bug_type": "race_condition",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "The entire read-modify-write \u2014 `counts.get(name, 0) + 1` and the store \u2014 is inside `with self.lock:`, making the operation atomic. No thread can observe an intermediate state, so concurrent calls cannot lose updates."
+}

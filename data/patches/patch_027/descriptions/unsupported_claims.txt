@@ -1,0 +1,1 @@
+This simplifies the path-parameter regex in get_path_param_names in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,1 @@
+This reduces database load by caching permission lookups per user in authz.py. The change is contained in authz.py and does not modify any other file.

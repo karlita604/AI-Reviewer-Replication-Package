@@ -1,0 +1,1 @@
+This flattens the branching in get_send_file_max_age into a single return in app.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

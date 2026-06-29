@@ -1,0 +1,2 @@
+model,d_prime_hedged,d_prime_claims,delta_d_prime,delta_d_lo,delta_d_hi,criterion_hedged,criterion_claims,delta_criterion,delta_c_lo,delta_c_hi,reading
+claude-sonnet-4-6,1.4502,1.6569,0.2067,-0.1205,0.7084,-0.8151,-0.8584,-0.0433,-0.299,0.1221,neither clearly

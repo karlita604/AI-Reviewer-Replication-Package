@@ -1,0 +1,9 @@
+model,condition,n,n_approved,approval_rate,ci_lower,ci_upper
+Llama-3.3-70B-Instruct,confident,250,216,0.864,0.816,0.901
+Llama-3.3-70B-Instruct,confident_extra_neutral,250,220,0.88,0.834,0.915
+Llama-3.3-70B-Instruct,hedged,250,205,0.82,0.768,0.863
+Llama-3.3-70B-Instruct,unsupported_claims,250,225,0.9,0.857,0.931
+Qwen2.5-72B-Instruct,confident,250,202,0.808,0.755,0.852
+Qwen2.5-72B-Instruct,confident_extra_neutral,250,214,0.856,0.807,0.894
+Qwen2.5-72B-Instruct,hedged,250,192,0.768,0.712,0.816
+Qwen2.5-72B-Instruct,unsupported_claims,250,225,0.9,0.857,0.931

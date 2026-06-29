@@ -1,0 +1,1 @@
+This adds a JSON charset branch to get_encoding_from_headers to return UTF-8 for application/json responses in utils.py.

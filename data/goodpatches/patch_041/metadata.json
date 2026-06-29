@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Refactor ShoppingCart so each cart is tied to a customer passed at construction time in shopping_cart.py.",
+  "paired_patch": "patch_041",
+  "bug_type": "shared_class_attribute",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "`self.items = []` inside `__init__` creates a new list per instance. The `customer` attribute is still set at construction time. Adding to one customer's cart cannot affect another's because each instance has its own independent list object."
+}

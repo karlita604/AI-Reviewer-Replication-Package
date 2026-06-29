@@ -1,0 +1,29 @@
+Signal-detection analysis: reject = not-approve = 'I report a bug'.
+Hit = P(reject | bad), False alarm = P(reject | good). Log-linear corrected.
+d' = sensitivity (good-vs-bad discrimination); c = criterion (higher = more lenient / lower bar to approve).
+CAVEAT: this verdict d'/c split is single-operating-point and assumes equal-variance Gaussian; the verdict 'confidence' field is too degenerate (near-constant 'high') to trace an ROC and test it, so the model-free result is the approval odds ratio, with d'/c as its gloss. The belief SDT below adds an assumption-free AUC.
+Models with both good and bad data: 8.
+
+=== Qwen2.5-14B-Instruct ===
+  hedged                     hit=0.867 fa=0.719  d'=+0.530  c=-0.845
+
+=== Qwen2.5-32B-Instruct ===
+  hedged                     hit=0.851 fa=0.631  d'=+0.703  c=-0.687
+
+=== Qwen2.5-3B-Instruct ===
+  hedged                     hit=0.719 fa=0.643  d'=+0.213  c=-0.474
+
+=== Qwen2.5-72B-Instruct ===
+  hedged                     hit=0.687 fa=0.185  d'=+1.384  c=+0.204
+
+=== Qwen2.5-7B-Instruct ===
+  hedged                     hit=0.444 fa=0.353  d'=+0.238  c=+0.259
+
+=== gemma-2-9b-it ===
+  hedged                     hit=0.265 fa=0.193  d'=+0.238  c=+0.747
+
+=== Llama-3.3-70B-Instruct ===
+  hedged                     hit=0.544 fa=0.157  d'=+1.115  c=+0.448
+
+=== Meta-Llama-3.1-8B-Instruct ===
+  hedged                     hit=0.373 fa=0.233  d'=+0.404  c=+0.527

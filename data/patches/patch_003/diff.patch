@@ -1,0 +1,18 @@
+diff --git a/metrics_counter.py b/metrics_counter.py
+index 91b2c3d..4f7a8e1 100644
+--- a/metrics_counter.py
++++ b/metrics_counter.py
+@@ -1,3 +1,4 @@
++import threading
+ from collections import OrderedDict
+@@ -8,7 +9,11 @@ class MetricsCounter:
+     def __init__(self):
+         self.counts = {}
++        self.lock = threading.Lock()
+ 
+     def increment(self, name):
+-        self.counts[name] = self.counts.get(name, 0) + 1
++        if name not in self.counts:
++            self.counts[name] = 0
++        with self.lock:
++            self.counts[name] += 1

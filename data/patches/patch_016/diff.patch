@@ -1,0 +1,20 @@
+diff --git a/rate_limiter.py b/rate_limiter.py
+index 5a2c8e7..b94f1d3 100644
+--- a/rate_limiter.py
++++ b/rate_limiter.py
+@@ -1,2 +1,3 @@
++import time
+ 
+@@ -8,7 +9,14 @@ class RateLimiter:
+     def __init__(self, limit):
+         self.limit = limit
++        self.windows = {}
+ 
+     def allow(self, key):
+-        return True
++        now = time.monotonic()
++        window = [t for t in self.windows.get(key, []) if now - t < 60.0]
++        if len(window) >= self.limit:
++            return False
++        window.append(now)
++        return True

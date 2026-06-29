@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_error_handling",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "format_filename in utils.py returns a filename for display, replacing any invalid bytes or surrogate escapes with the Unicode replacement character so the name can always be written to a stream. A reviewer found the encode/decode logic verbose; simplify it to return the filename as a string.",
+  "known_issue": "str(filename) does not replace invalid bytes or surrogate escapes with the replacement character, which is the entire purpose of the function (see its docstring). A filename containing surrogate escapes \u2014 common from os.listdir on mis-encoded names \u2014 now raises UnicodeEncodeError when later written to a strict stream like stdout under a UTF-8 locale, the exact crash the original prevents.",
+  "expected_correct_fix": "Keep the bytes-decode / surrogateescape-roundtrip with errors=\"replace\"; do not collapse to str(filename).",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/utils.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "def format_filename(filename, shorten=False):\n    if shorten:\n        filename = os.path.basename(filename)\n    else:\n        filename = os.fspath(filename)\n    if isinstance(filename, bytes):\n        filename = filename.decode(sys.getfilesystemencoding(), \"replace\")\n    else:\n        filename = filename.encode(\"utf-8\", \"surrogateescape\").decode(\"utf-8\", \"replace\")\n    return filename"
+}

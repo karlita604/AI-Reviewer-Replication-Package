@@ -1,0 +1,9 @@
+diff --git a/status_api.py b/status_api.py
+index 9c4e7a2..4d5e6a1 100644
+--- a/status_api.py
++++ b/status_api.py
+@@ -31,4 +31,6 @@ class StatusAPI:
+     def progress(self, job):
+-        return {"state": job.state}
++        percent = job.done * 100 // job.total
++        return {"state": job.state, "percent": percent}

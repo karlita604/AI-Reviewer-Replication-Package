@@ -1,0 +1,1 @@
+This allows optional labels on alerts by adding a labels parameter to create_alert in alerting.py. The change is contained in alerting.py and does not modify any other file.

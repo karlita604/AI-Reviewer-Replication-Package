@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "parse_list_header in utils.py parses an HTTP list header into its elements, where an element may be a quoted-string that itself contains a comma (RFC 2068). It currently delegates to urllib3 and strips the surrounding quotes. Replace it with a direct comma split.",
+  "paired_patch": "patch_030",
+  "bug_type": "naive_parsing",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The urllib3 quote-aware parser is kept via a list comprehension, which simplifies the original loop. `parse_list_header` correctly handles quoted commas; `unquote_header_value` then strips surrounding quotes. The RFC-mandated semantics are fully preserved.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def parse_list_header(value):\n    result = []\n    for item in urllib3.util.parse_list_header(value):\n        if item[:1] == item[-1:] == '\\\"':\n            item = unquote_header_value(item[1:-1])\n        result.append(item)\n    return result"
+}

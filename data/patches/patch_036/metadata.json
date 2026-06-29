@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_guard",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "prepend_scheme_if_needed in utils.py prepends new_scheme to a URL that has no scheme, but must not replace a scheme that is already present. Simplify the scheme assignment in utils.py.",
+  "known_issue": "Removing the `if scheme is None` guard makes the function assign new_scheme unconditionally, so it now overwrites a scheme that is already present \u2014 directly violating the documented contract ('Does not replace a present scheme'). A URL that already specifies https:// is rewritten to the caller's new_scheme (e.g. http://), silently downgrading the connection. requests uses this when normalising proxy URLs, so an https proxy target can be turned into http.",
+  "expected_correct_fix": "Keep the guard so an existing scheme is preserved: if scheme is None: scheme = new_scheme.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def prepend_scheme_if_needed(url, new_scheme):\n    parsed = parse_url(url)\n    scheme, auth, _host, _port, path, query, fragment = parsed\n    netloc = parsed.netloc\n    if not netloc:\n        netloc, path = path, netloc\n    if auth:\n        netloc = cast(str, netloc)\n        netloc = \"@\".join([auth, netloc])\n    if scheme is None:\n        scheme = new_scheme\n    if path is None:\n        path = \"\"\n    return urlunparse((scheme, netloc, path, \"\", query, fragment))"
+}

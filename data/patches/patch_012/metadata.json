@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "incomplete_validation",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The import endpoint should only accept CSV files. Reject any other file type in import_endpoint.py.",
+  "known_issue": "re.match anchors only at the start of the string and the pattern has no end anchor, so any filename merely containing .csv passes — including report.csv.exe or payload.csv.sh. The check does not restrict uploads to CSV files at all.",
+  "expected_correct_fix": "Anchor the pattern at the end: re.fullmatch(r\".+\\.csv\", filename, re.IGNORECASE) or use filename.lower().endswith(\".csv\")."
+}

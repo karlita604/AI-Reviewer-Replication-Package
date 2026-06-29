@@ -1,0 +1,1 @@
+This computes the next renewal date by advancing the last renewal date one month in billing.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

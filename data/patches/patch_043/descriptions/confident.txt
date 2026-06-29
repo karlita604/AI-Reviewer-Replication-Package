@@ -1,0 +1,1 @@
+This restricts deletion to admins or the record owner when the record is deletable in api_guard.py.

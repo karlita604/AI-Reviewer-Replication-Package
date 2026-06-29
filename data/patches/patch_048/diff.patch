@@ -1,0 +1,9 @@
+diff --git a/src/flask/sessions.py b/src/flask/sessions.py
+index 36e4a82..b2d7f10 100644
+--- a/src/flask/sessions.py
++++ b/src/flask/sessions.py
+@@ -206,7 +206,7 @@ class SessionInterface:
+     def get_cookie_secure(self, app: Flask) -> bool:
+         """Returns True if the cookie should be secure."""
+-        return app.config["SESSION_COOKIE_SECURE"]
++        return app.config.get("SESSION_COOKIE_SECURE", True)

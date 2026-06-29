@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "unquote_header_value in utils.py has accumulated years of comments and special-casing. Clean up the function body.",
+  "paired_patch": "patch_025",
+  "bug_type": "dropped_edge_case",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The cleanup removes only the verbose comments while keeping the UNC-path guard (`if not is_filename or value[:2] != \"\\\\\\\\\":`). The backslash replacements are therefore never applied to UNC filenames, preserving the fix for #458 and keeping `is_filename` meaningful.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def unquote_header_value(value: str, is_filename: bool = False) -> str:\n    if value and value[0] == value[-1] == '\\\"':\n        value = value[1:-1]\n        if not is_filename or value[:2] != \"\\\\\\\\\\\\\\\\\":\n            return value.replace(\"\\\\\\\\\\\\\\\\\", \"\\\\\\\\\").replace('\\\\\\\\\\\"', '\\\"')\n    return value"
+}

@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Jobs are occasionally processed twice when multiple workers poll the same directory. Make JobWorker.claim() ensure only one worker takes a given job file.",
+  "paired_patch": "patch_014",
+  "bug_type": "toctou_race",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Opening the lock file with mode `'x'` (exclusive-create) is atomic at the OS level: the file is either created by this process or the call raises FileExistsError. There is no window between the check and the creation, so exactly one worker claims the job regardless of concurrency."
+}

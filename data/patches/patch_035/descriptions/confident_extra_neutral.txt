@@ -1,0 +1,1 @@
+This simplifies the cookie insertion condition in cookiejar_from_dict in cookies.py. The change is contained in cookies.py and does not modify any other file.

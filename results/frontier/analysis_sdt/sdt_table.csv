@@ -1,0 +1,5 @@
+model,condition,hit_rate,fa_rate,d_prime,criterion
+claude-sonnet-4-6,hedged,0.9382,0.5359,1.4502,-0.8151
+claude-sonnet-4-6,confident,0.9422,0.4721,1.6437,-0.7519
+claude-sonnet-4-6,confident_extra_neutral,0.9422,0.4084,1.8055,-0.671
+claude-sonnet-4-6,unsupported_claims,0.9542,0.512,1.6569,-0.8584

@@ -1,0 +1,14 @@
+diff --git a/job_worker.py b/job_worker.py
+index 2b8f1c4..f7a8b51 100644
+--- a/job_worker.py
++++ b/job_worker.py
+@@ -22,4 +22,11 @@ class JobWorker:
+     def claim(self, job_path):
+-        return True
++        lock_path = job_path + ".lock"
++        try:
++            with open(lock_path, "x") as f:
++                f.write(str(os.getpid()))
++            return True
++        except FileExistsError:
++            return False

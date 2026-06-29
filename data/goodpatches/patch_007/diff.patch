@@ -1,0 +1,9 @@
+diff --git a/user_admin.py b/user_admin.py
+index 3a9e1c5..f7g8h91 100644
+--- a/user_admin.py
++++ b/user_admin.py
+@@ -31,5 +31,7 @@ class UserAdmin:
+     def search_users(self, query):
+-        raise NotImplementedError
++        sql = "SELECT id, username, email FROM users WHERE username LIKE ?"
++        return self.db.execute(sql, (f"%{query}%",)).fetchall()

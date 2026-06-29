@@ -1,0 +1,3 @@
+arm,good_appr,good_appr_A,delta_good_pts,cost_label,hedged_bad_A,hedged_bad_arm,spec_drop_pts,spec_guard
+B,46.8,65.4,-18.6,Over-correction (fails cost),37.8,32.6,5.1,FAIL
+B2,46.6,65.4,-18.8,Over-correction (fails cost),37.8,29.2,8.5,FAIL

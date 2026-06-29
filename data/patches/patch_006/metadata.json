@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "silent_failure",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Transient 5xx errors from the payments API cause one-off charge failures. Add retry with backoff to PaymentsClient.charge() so transient errors are retried up to 3 times before failing.",
+  "known_issue": "range(3) yields attempts 0-2, so `if attempt == 3` is never true: on the final attempt the TransientAPIError is swallowed, the loop ends, and charge() implicitly returns None instead of raising — callers checking only for an exception will treat a failed charge as successful.",
+  "expected_correct_fix": "Re-raise on the last attempt (`if attempt == 2: raise`), or restructure so the final attempt happens outside the try/except."
+}

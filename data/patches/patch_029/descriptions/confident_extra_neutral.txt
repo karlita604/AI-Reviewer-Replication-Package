@@ -1,0 +1,1 @@
+This simplifies format_filename by returning the filename as a string in utils.py. The change is contained in utils.py and does not modify any other file.

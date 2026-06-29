@@ -1,0 +1,12 @@
+diff --git a/tenant_config.py b/tenant_config.py
+index 7d3e9f2..c81b4a6 100644
+--- a/tenant_config.py
++++ b/tenant_config.py
+@@ -14,5 +14,10 @@ class TenantConfigStore:
+     def config_for_tenant(self, tenant_id):
+-        return self.base_config
++        overrides = self._load_overrides(tenant_id)
++        config = dict(self.base_config)
++        for section, values in overrides.items():
++            config[section].update(values)
++        return config

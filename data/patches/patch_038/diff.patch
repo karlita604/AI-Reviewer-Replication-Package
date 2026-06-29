@@ -1,0 +1,10 @@
+diff --git a/transfer.py b/transfer.py
+index 2b3c4d5..6e7f8a9 100644
+--- a/transfer.py
++++ b/transfer.py
+@@ -14,5 +14,6 @@ class Transfer:
+     def withdraw(self, account, amount):
+-        raise NotImplementedError
++        assert amount > 0, "amount must be positive"
++        assert amount <= account.balance, "insufficient funds"
++        account.balance -= amount

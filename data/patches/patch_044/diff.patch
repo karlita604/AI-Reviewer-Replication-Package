@@ -1,0 +1,9 @@
+diff --git a/src/flask/sessions.py b/src/flask/sessions.py
+index 36e4a82..a71c3e9 100644
+--- a/src/flask/sessions.py
++++ b/src/flask/sessions.py
+@@ -190,7 +190,7 @@ class SessionInterface:
+         uses ``/`` if it's ``None``.
+         """
+-        return app.config["SESSION_COOKIE_PATH"] or app.config["APPLICATION_ROOT"]
++        return app.config["APPLICATION_ROOT"] or app.config["SESSION_COOKIE_PATH"]

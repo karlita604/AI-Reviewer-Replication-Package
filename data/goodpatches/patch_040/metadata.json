@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "LogScanner.count_errors() should return the total number of lines containing 'ERROR' across the given log files. Implement it in log_scanner.py. It may be called with thousands of paths.",
+  "paired_patch": "patch_040",
+  "bug_type": "resource_leak",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Using `with open(path) as f:` ensures the file descriptor is closed immediately after each iteration, regardless of exceptions. No descriptors accumulate across thousands of paths, so the process never approaches the OS open-file limit."
+}

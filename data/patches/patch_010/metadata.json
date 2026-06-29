@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "mutation_during_iteration",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Expired sessions accumulate in memory indefinitely. Add periodic purging of expired sessions to session_registry.py.",
+  "known_issue": "purge_expired deletes from self.sessions while iterating over .items(), which raises RuntimeError: dictionary changed size during iteration as soon as the first expired session is removed — the purge crashes and removes at most one session per call.",
+  "expected_correct_fix": "Iterate over a snapshot: for sid, session in list(self.sessions.items()), or rebuild the dict with a comprehension keeping unexpired entries."
+}

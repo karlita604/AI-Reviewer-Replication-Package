@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "The Windows branch of get_app_dir in utils.py takes four lines for one lookup. Simplify it to a direct environment lookup.",
+  "paired_patch": "patch_032",
+  "bug_type": "dropped_fallback",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`os.environ.get(key) or os.path.expanduser('~')` collapses the four-line if/None/fallback pattern into one expression while keeping the home-directory fallback. APPDATA/LOCALAPPDATA missing in headless or CI environments falls through to `~` instead of raising KeyError.",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/utils.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "if WIN:\n    key = \"APPDATA\" if roaming else \"LOCALAPPDATA\"\n    folder = os.environ.get(key)\n    if folder is None:\n        folder = os.path.expanduser(\"~\")\n    return os.path.join(folder, app_name)"
+}

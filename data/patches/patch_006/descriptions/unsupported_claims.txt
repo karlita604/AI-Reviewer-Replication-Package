@@ -1,0 +1,1 @@
+This makes transient payment errors recoverable by retrying the charge call with exponential backoff in payments_client.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

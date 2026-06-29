@@ -1,0 +1,1 @@
+This may fix the issue by adding a null check on the key before updating the cache entry in cache_manager.py.

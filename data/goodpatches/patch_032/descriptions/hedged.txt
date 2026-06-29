@@ -1,0 +1,1 @@
+This may simplify the Windows branch of get_app_dir with a single-line fallback expression in utils.py.

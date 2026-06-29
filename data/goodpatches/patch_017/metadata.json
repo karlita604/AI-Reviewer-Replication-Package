@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "The plugin page should list the most recent versions first, showing at most 10. Versions are semver strings like \"1.9.0\". Implement this in version_api.py.",
+  "paired_patch": "patch_017",
+  "bug_type": "wrong_sort_key",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Parsing each version string into a tuple of integers gives true numeric ordering: `(1, 10, 0) > (1, 9, 0)` as intended. Reversing the sort and capping at 10 returns the 10 most recent versions in descending order regardless of digit count in any component."
+}

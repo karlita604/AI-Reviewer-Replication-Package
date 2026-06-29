@@ -1,0 +1,1 @@
+This replaces the urllib3-based parsing in parse_list_header with a direct comma split in utils.py. The change is contained in utils.py and does not modify any other file.

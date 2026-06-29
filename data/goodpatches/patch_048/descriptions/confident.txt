@@ -1,0 +1,1 @@
+This makes get_cookie_secure tolerate a missing config key in sessions.py.

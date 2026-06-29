@@ -1,0 +1,1 @@
+This cleans up unquote_header_value by removing verbose legacy browser comments while preserving the UNC-path guard in utils.py. The change is contained in utils.py and does not modify any other file.

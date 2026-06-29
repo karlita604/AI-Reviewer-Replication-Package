@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "stale_cache",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "Permission checks hit the database on every request and dominate query load. Cache permission lookups in authz.py.",
+  "known_issue": "The cache has no TTL and no invalidation hook, so permission changes never take effect for the lifetime of the process. In particular a revoked permission (e.g. removing admin rights from a compromised account) keeps working until the service is restarted.",
+  "expected_correct_fix": "Add a TTL to cache entries or an invalidate(user_id) hook called on permission writes; for security-sensitive checks a short TTL is the minimum."
+}

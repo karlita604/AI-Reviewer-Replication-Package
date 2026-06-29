@@ -1,0 +1,14 @@
+diff --git a/metrics_buffer.py b/metrics_buffer.py
+index 7e2d1a9..c4b8f06 100644
+--- a/metrics_buffer.py
++++ b/metrics_buffer.py
+@@ -17,6 +17,10 @@ class MetricsBuffer:
+     def flush(self):
+-        self.client.send(self.buffer)
+-        self.buffer.clear()
++        try:
++            self.client.send(self.buffer)
++        except Exception:
++            pass
++        finally:
++            self.buffer.clear()

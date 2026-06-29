@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "resource_leak",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "LogScanner.count_errors() should return the total number of lines containing 'ERROR' across the given log files. Implement it in log_scanner.py. It may be called with thousands of paths.",
+  "known_issue": "Each opened file is never closed. The file objects are only released on garbage collection, which is non-deterministic; over thousands of paths the process exhausts its open file-descriptor limit and raises OSError: Too many open files mid-scan.",
+  "expected_correct_fix": "Use a context manager: for path in paths: with open(path) as f: ... so each descriptor is closed promptly."
+}

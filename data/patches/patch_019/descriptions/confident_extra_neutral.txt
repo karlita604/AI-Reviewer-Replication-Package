@@ -1,0 +1,1 @@
+This computes the next renewal date by advancing the last renewal date one month in billing.py. The change is contained in billing.py and does not modify any other file.

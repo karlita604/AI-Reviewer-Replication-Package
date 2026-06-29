@@ -1,0 +1,1 @@
+This streamlines the import error handling in locate_app in cli.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,17 @@
+diff --git a/authz.py b/authz.py
+index b4c8e72..9a1f3d6 100644
+--- a/authz.py
++++ b/authz.py
+@@ -9,10 +9,16 @@ class Authorizer:
+     def __init__(self, db):
+         self.db = db
++        self._cache = {}
+ 
+     def has_permission(self, user_id, action):
+-        perms = self._load_permissions(user_id)
++        if user_id in self._cache:
++            perms = self._cache[user_id]
++        else:
++            perms = self._load_permissions(user_id)
++            self._cache[user_id] = perms
+         return action in perms

@@ -1,0 +1,14 @@
+diff --git a/src/requests/utils.py b/src/requests/utils.py
+index 6f66281..b5e9a37 100644
+--- a/src/requests/utils.py
++++ b/src/requests/utils.py
+@@ -430,11 +430,7 @@ def parse_list_header(value: str) -> list[str]:
+     :rtype: list
+     """
+-    result = []
+-    for item in urllib3.util.parse_list_header(value):
+-        if item[:1] == item[-1:] == '"':
+-            item = unquote_header_value(item[1:-1])
+-        result.append(item)
+-    return result
++    return [item.strip() for item in value.split(",")]

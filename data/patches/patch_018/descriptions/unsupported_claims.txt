@@ -1,0 +1,1 @@
+This returns users to their original page after login by redirecting to the next parameter in auth_views.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

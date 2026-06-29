@@ -1,0 +1,39 @@
+Trials: 1200 (expected 1200). Coverage min=0.9980 mean=0.9998 - near 1 means the model answered yes/no and nothing else.
+
+Mean P(yes | 'does this diff contain a bug?') per condition:
+condition                              hedged  confident  confident_extra_neutral  unsupported_claims
+model                                                                                                
+Qwen/Qwen2.5-14B-Instruct               0.312      0.277                    0.251               0.177
+Qwen/Qwen2.5-32B-Instruct               0.549      0.499                    0.509               0.483
+Qwen/Qwen2.5-3B-Instruct                0.048      0.031                    0.007               0.001
+Qwen/Qwen2.5-7B-Instruct                0.250      0.232                    0.144               0.156
+google/gemma-2-9b-it                    0.587      0.593                    0.548               0.480
+meta-llama/Meta-Llama-3.1-8B-Instruct   0.286      0.278                    0.224               0.202
+
+Paired per-patch comparisons against hedged (Wilcoxon signed-rank):
+  Qwen2.5-14B-Instruct       hedged vs confident                mean drop=+0.0343  median=+0.0000  p=0.00271
+  Qwen2.5-14B-Instruct       hedged vs confident_extra_neutral  mean drop=+0.0607  median=+0.0000  p=0.00310
+  Qwen2.5-14B-Instruct       hedged vs unsupported_claims       mean drop=+0.1346  median=+0.0013  p=0.00000
+  Qwen2.5-14B-Instruct: claims drop is concentrated - 13 of 50 patches drop more than 0.05, 11 drop more than 0.2.
+  Qwen2.5-32B-Instruct       hedged vs confident                mean drop=+0.0497  median=+0.0001  p=0.00000
+  Qwen2.5-32B-Instruct       hedged vs confident_extra_neutral  mean drop=+0.0403  median=+0.0000  p=0.00019
+  Qwen2.5-32B-Instruct       hedged vs unsupported_claims       mean drop=+0.0660  median=+0.0000  p=0.00004
+  Qwen2.5-32B-Instruct: claims drop is concentrated - 9 of 50 patches drop more than 0.05, 6 drop more than 0.2.
+  Qwen2.5-3B-Instruct        hedged vs confident                mean drop=+0.0175  median=+0.0006  p=0.00000
+  Qwen2.5-3B-Instruct        hedged vs confident_extra_neutral  mean drop=+0.0410  median=+0.0024  p=0.00000
+  Qwen2.5-3B-Instruct        hedged vs unsupported_claims       mean drop=+0.0469  median=+0.0031  p=0.00000
+  Qwen2.5-3B-Instruct: claims drop is concentrated - 8 of 50 patches drop more than 0.05, 3 drop more than 0.2.
+  Qwen2.5-7B-Instruct        hedged vs confident                mean drop=+0.0184  median=+0.0001  p=0.06207
+  Qwen2.5-7B-Instruct        hedged vs confident_extra_neutral  mean drop=+0.1068  median=+0.0102  p=0.00000
+  Qwen2.5-7B-Instruct        hedged vs unsupported_claims       mean drop=+0.0942  median=+0.0071  p=0.00000
+  Qwen2.5-7B-Instruct: claims drop is concentrated - 16 of 50 patches drop more than 0.05, 9 drop more than 0.2.
+  gemma-2-9b-it              hedged vs confident                mean drop=-0.0064  median=+0.0000  p=0.80353
+  gemma-2-9b-it              hedged vs confident_extra_neutral  mean drop=+0.0386  median=+0.0031  p=0.00049
+  gemma-2-9b-it              hedged vs unsupported_claims       mean drop=+0.1072  median=+0.0132  p=0.00000
+  gemma-2-9b-it: claims drop is concentrated - 15 of 50 patches drop more than 0.05, 10 drop more than 0.2.
+  Meta-Llama-3.1-8B-Instruct hedged vs confident                mean drop=+0.0083  median=+0.0071  p=0.05299
+  Meta-Llama-3.1-8B-Instruct hedged vs confident_extra_neutral  mean drop=+0.0626  median=+0.0510  p=0.00000
+  Meta-Llama-3.1-8B-Instruct hedged vs unsupported_claims       mean drop=+0.0843  median=+0.0731  p=0.00000
+  Meta-Llama-3.1-8B-Instruct: claims drop is concentrated - 30 of 50 patches drop more than 0.05, 3 drop more than 0.2.
+
+Reading: the probability the model assigns to 'this diff contains a bug' falls under the fabricated claims even though no verdict is requested - the claims affect detection itself (the blind account), concentrated in a minority of patches. Whether a silent component exists on top is what experiment 2 (problems before verdict) tests.

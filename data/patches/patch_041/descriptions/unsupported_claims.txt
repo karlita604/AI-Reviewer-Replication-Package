@@ -1,0 +1,1 @@
+This ties each ShoppingCart to a customer provided at construction time in shopping_cart.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,9 @@
+model,cond_a,cond_b,p_value
+Qwen2.5-72B-Instruct,hedged,confident,0.5
+Qwen2.5-72B-Instruct,hedged,confident_extra_neutral,0.125
+Qwen2.5-72B-Instruct,hedged,unsupported_claims,0.0039
+Qwen2.5-72B-Instruct,confident,unsupported_claims,0.0156
+Llama-3.3-70B-Instruct,hedged,confident,1.0
+Llama-3.3-70B-Instruct,hedged,confident_extra_neutral,1.0
+Llama-3.3-70B-Instruct,hedged,unsupported_claims,0.0078
+Llama-3.3-70B-Instruct,confident,unsupported_claims,0.0039

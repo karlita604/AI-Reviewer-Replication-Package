@@ -1,0 +1,17 @@
+diff --git a/src/flask/app.py b/src/flask/app.py
+index 36e4a82..f8c2d91 100644
+--- a/src/flask/app.py
++++ b/src/flask/app.py
+@@ -380,12 +380,9 @@ class Flask(App):
+         .. versionadded:: 0.9
+         """
+         value = self.config["SEND_FILE_MAX_AGE_DEFAULT"]
+
+-        if value is None:
+-            return None
+-
+         if isinstance(value, timedelta):
+             return int(value.total_seconds())
+
+-        return value  # type: ignore[no-any-return]
++        return value or None  # type: ignore[no-any-return]

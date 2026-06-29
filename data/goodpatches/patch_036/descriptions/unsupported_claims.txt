@@ -1,0 +1,1 @@
+This fixes prepend_scheme_if_needed to only assign the fallback scheme when none is already present in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "exception_swallowing",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "A transient outage of the metrics backend currently crashes the request handler mid-request. Make MetricsBuffer.flush() resilient so an unavailable backend does not take down request handling.",
+  "known_issue": "except Exception: pass silently swallows every error including programming errors (AttributeError, TypeError), and the finally clause clears the buffer even when the send failed — so on any failure all buffered metrics are discarded without a single log line.",
+  "expected_correct_fix": "Catch the specific connection/timeout exception type, log the failure, and only clear the buffer on success (or bound its size explicitly when retaining)."
+}

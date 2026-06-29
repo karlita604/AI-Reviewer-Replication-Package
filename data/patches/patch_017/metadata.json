@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "wrong_sort_key",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The plugin page should list the most recent versions first, showing at most 10. Versions are semver strings like \"1.9.0\". Implement this in version_api.py.",
+  "known_issue": "Version strings are sorted lexicographically, not numerically: \"1.9.0\" sorts after \"1.10.0\", so 1.9.0 is shown as more recent than 1.10.0 and any double-digit component breaks the ordering. The cap then also drops the wrong versions.",
+  "expected_correct_fix": "Sort on the parsed numeric components: sorted(versions, key=lambda v: tuple(map(int, v.split('.'))), reverse=True)[:10]."
+}

@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_fallback",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The Windows branch of get_app_dir in utils.py takes four lines for one lookup. Simplify it to a direct environment lookup.",
+  "known_issue": "os.environ[key] drops the home-directory fallback: when APPDATA/LOCALAPPDATA is unset \u2014 common for services, scheduled tasks, and stripped CI environments \u2014 get_app_dir now raises KeyError instead of falling back to the user's home directory as it always has.",
+  "expected_correct_fix": "Keep the fallback: folder = os.environ.get(key) or os.path.expanduser(\"~\").",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/utils.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "if WIN:\n    key = \"APPDATA\" if roaming else \"LOCALAPPDATA\"\n    folder = os.environ.get(key)\n    if folder is None:\n        folder = os.path.expanduser(\"~\")\n    return os.path.join(folder, app_name)"
+}

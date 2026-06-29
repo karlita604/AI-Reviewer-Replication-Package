@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "whitespace_handling",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "_posixify in utils.py turns an app name into a posix-friendly token. Simplify the space-to-dash conversion.",
+  "known_issue": "name.split() splits on ANY run of whitespace and drops leading/trailing whitespace, collapsing runs into a single dash. name.replace(' ', '-') only handles single spaces: an app name like 'Foo  Bar' (two spaces) becomes 'foo--bar' (double dash), tabs/newlines are left untouched, and a leading space yields a leading dash. The derived config-directory name changes, so get_app_dir points at a different folder than before \u2014 existing user config silently 'disappears'.",
+  "expected_correct_fix": "Keep '-'.join(name.split()).lower(), which normalises all whitespace runs.",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/utils.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "def _posixify(name):\n    return \"-\".join(name.split()).lower()"
+}

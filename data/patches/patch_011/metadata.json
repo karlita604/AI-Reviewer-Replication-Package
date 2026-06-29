@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "mutable_default_argument",
+  "difficulty": "easy",
+  "is_buggy": true,
+  "task": "Allow callers of create_alert() to attach optional labels to an alert in alerting.py.",
+  "known_issue": "labels=[] is a mutable default that is shared across calls, and labels.append() mutates it: every call without explicit labels appends default_label to the same list again, so all default-labelled alerts share one ever-growing labels list.",
+  "expected_correct_fix": "Use labels=None and copy: labels = list(labels) if labels is not None else []; then append default_label to the copy."
+}

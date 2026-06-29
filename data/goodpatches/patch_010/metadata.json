@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Expired sessions accumulate in memory indefinitely. Add periodic purging of expired sessions to session_registry.py.",
+  "paired_patch": "patch_010",
+  "bug_type": "mutation_during_iteration",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Iterating over `list(self.sessions.items())` creates a snapshot of the key-value pairs before the loop starts. Deleting from `self.sessions` inside the loop no longer raises RuntimeError, and every expired session is removed in a single pass without missing entries."
+}

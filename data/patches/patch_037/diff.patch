@@ -1,0 +1,10 @@
+diff --git a/file_download.py b/file_download.py
+index 1a2b3c4..5d6e7f8 100644
+--- a/file_download.py
++++ b/file_download.py
+@@ -8,6 +8,8 @@ class FileDownload:
+     def read(self, filename):
+-        raise NotImplementedError
++        path = os.path.join(self.base_dir, filename)
++        with open(path, "rb") as f:
++            return f.read()

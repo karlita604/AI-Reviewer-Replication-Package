@@ -1,0 +1,1 @@
+This returns users to their original page after login by redirecting to the next parameter in auth_views.py. The change is contained in auth_views.py and does not modify any other file.

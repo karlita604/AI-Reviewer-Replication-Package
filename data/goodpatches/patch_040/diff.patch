@@ -1,0 +1,12 @@
+diff --git a/log_scanner.py b/log_scanner.py
+index 4d5e6f7..8a9b0c1 100644
+--- a/log_scanner.py
++++ b/log_scanner.py
+@@ -11,6 +11,9 @@ class LogScanner:
+     def count_errors(self, paths):
+-        raise NotImplementedError
++        total = 0
++        for path in paths:
++            with open(path) as f:
++                total += sum(1 for line in f if "ERROR" in line)
++        return total

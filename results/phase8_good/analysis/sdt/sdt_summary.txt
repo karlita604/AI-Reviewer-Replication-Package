@@ -1,0 +1,106 @@
+Signal-detection analysis: reject = not-approve = 'I report a bug'.
+Hit = P(reject | bad), False alarm = P(reject | good). Log-linear corrected.
+d' = sensitivity (good-vs-bad discrimination); c = criterion (higher = more lenient / lower bar to approve).
+CAVEAT: this verdict d'/c split is single-operating-point and assumes equal-variance Gaussian; the verdict 'confidence' field is too degenerate (near-constant 'high') to trace an ROC and test it, so the model-free result is the approval odds ratio, with d'/c as its gloss. The belief SDT below adds an assumption-free AUC.
+Models with both good and bad data: 6.
+
+=== Qwen2.5-14B-Instruct ===
+  hedged                     hit=0.894 fa=0.867  d'=+0.140  c=-1.180
+  confident                  hit=0.871 fa=0.835  d'=+0.156  c=-1.051
+  confident_extra_neutral    hit=0.863 fa=0.831  d'=+0.135  c=-1.024
+  unsupported_claims         hit=0.807 fa=0.691  d'=+0.367  c=-0.683
+  hedged -> unsupported_claims:  d d'=+0.226 [-0.234, +0.707]   d c=+0.498 [+0.268, +0.828]
+  -> criterion shift (lower bar)
+
+=== Qwen2.5-32B-Instruct ===
+  hedged                     hit=0.875 fa=0.687  d'=+0.660  c=-0.818
+  confident                  hit=0.827 fa=0.580  d'=+0.740  c=-0.571
+  confident_extra_neutral    hit=0.839 fa=0.687  d'=+0.501  c=-0.738
+  unsupported_claims         hit=0.735 fa=0.420  d'=+0.829  c=-0.214
+  hedged -> unsupported_claims:  d d'=+0.169 [-0.324, +0.643]   d c=+0.604 [+0.406, +0.858]
+  -> criterion shift (lower bar)
+
+=== Qwen2.5-3B-Instruct ===
+  hedged                     hit=0.699 fa=0.711  d'=-0.035  c=-0.539
+  confident                  hit=0.556 fa=0.536  d'=+0.050  c=-0.115
+  confident_extra_neutral    hit=0.460 fa=0.448  d'=+0.030  c=+0.115
+  unsupported_claims         hit=0.269 fa=0.301  d'=-0.094  c=+0.569
+  hedged -> unsupported_claims:  d d'=-0.059 [-0.421, +0.306]   d c=+1.109 [+0.844, +1.435]
+  -> criterion shift (lower bar)
+
+=== Qwen2.5-7B-Instruct ===
+  hedged                     hit=0.568 fa=0.400  d'=+0.423  c=+0.041
+  confident                  hit=0.468 fa=0.261  d'=+0.560  c=+0.360
+  confident_extra_neutral    hit=0.325 fa=0.165  d'=+0.518  c=+0.714
+  unsupported_claims         hit=0.305 fa=0.205  d'=+0.313  c=+0.667
+  hedged -> unsupported_claims:  d d'=-0.110 [-0.424, +0.213]   d c=+0.626 [+0.414, +0.893]
+  -> criterion shift (lower bar)
+
+=== gemma-2-9b-it ===
+  hedged                     hit=0.369 fa=0.253  d'=+0.329  c=+0.500
+  confident                  hit=0.281 fa=0.201  d'=+0.257  c=+0.709
+  confident_extra_neutral    hit=0.217 fa=0.145  d'=+0.274  c=+0.919
+  unsupported_claims         hit=0.165 fa=0.125  d'=+0.175  c=+1.060
+  hedged -> unsupported_claims:  d d'=-0.154 [-0.415, +0.110]   d c=+0.560 [+0.336, +0.858]
+  -> criterion shift (lower bar)
+
+=== Meta-Llama-3.1-8B-Instruct ===
+  hedged                     hit=0.349 fa=0.225  d'=+0.366  c=+0.572
+  confident                  hit=0.225 fa=0.185  d'=+0.140  c=+0.825
+  confident_extra_neutral    hit=0.141 fa=0.082  d'=+0.320  c=+1.234
+  unsupported_claims         hit=0.145 fa=0.070  d'=+0.422  c=+1.267
+  hedged -> unsupported_claims:  d d'=+0.056 [-0.303, +0.510]   d c=+0.695 [+0.450, +1.065]
+  -> criterion shift (lower bar)
+
+
+##### Belief-based SDT (bug-question P(yes)) #####
+d'_belief = standardized separation of P(yes) on bad vs good (equal-variance Gaussian); AUC = same separation but assumption-free (full empirical ROC area); var_ratio = SD(good)/SD(bad), ~1 supports equal variance; level = overall bug-suspicion. The discrimination verdict uses AUC, not d'.
+Models with both good and bad belief data: 6.
+
+=== Qwen2.5-14B-Instruct ===
+  hedged                     P(yes) bad=0.312 good=0.047  d'=+0.826  AUC=0.750 (var_ratio=0.43)  level=0.179
+  confident                  P(yes) bad=0.277 good=0.039  d'=+0.771  AUC=0.747 (var_ratio=0.41)  level=0.158
+  confident_extra_neutral    P(yes) bad=0.251 good=0.040  d'=+0.726  AUC=0.745 (var_ratio=0.44)  level=0.146
+  unsupported_claims         P(yes) bad=0.177 good=0.012  d'=+0.652  AUC=0.742 (var_ratio=0.19)  level=0.095
+  hedged -> unsupported_claims:  d d'=-0.174 [-0.430, +0.059]   d AUC=-0.008 [-0.041, +0.025]   d level=-0.085 [-0.131, -0.048]
+  -> uniform belief drop (lower bar)
+
+=== Qwen2.5-32B-Instruct ===
+  hedged                     P(yes) bad=0.549 good=0.126  d'=+1.057  AUC=0.772 (var_ratio=0.65)  level=0.338
+  confident                  P(yes) bad=0.499 good=0.098  d'=+1.026  AUC=0.769 (var_ratio=0.56)  level=0.299
+  confident_extra_neutral    P(yes) bad=0.509 good=0.096  d'=+1.046  AUC=0.758 (var_ratio=0.57)  level=0.302
+  unsupported_claims         P(yes) bad=0.483 good=0.082  d'=+1.038  AUC=0.756 (var_ratio=0.52)  level=0.283
+  hedged -> unsupported_claims:  d d'=-0.019 [-0.248, +0.200]   d AUC=-0.016 [-0.044, +0.014]   d level=-0.055 [-0.096, -0.021]
+  -> uniform belief drop (lower bar)
+
+=== Qwen2.5-3B-Instruct ===
+  hedged                     P(yes) bad=0.048 good=0.047  d'=+0.011  AUC=0.487 (var_ratio=0.80)  level=0.047
+  confident                  P(yes) bad=0.031 good=0.031  d'=+0.000  AUC=0.472 (var_ratio=0.72)  level=0.031
+  confident_extra_neutral    P(yes) bad=0.007 good=0.006  d'=+0.051  AUC=0.499 (var_ratio=0.78)  level=0.007
+  unsupported_claims         P(yes) bad=0.001 good=0.001  d'=+0.126  AUC=0.500 (var_ratio=0.26)  level=0.001
+  hedged -> unsupported_claims:  d d'=+0.115 [-0.331, +0.246]   d AUC=+0.012 [-0.026, +0.061]   d level=-0.047 [-0.085, -0.019]
+  -> uniform belief drop (lower bar)
+
+=== Qwen2.5-7B-Instruct ===
+  hedged                     P(yes) bad=0.250 good=0.056  d'=+0.679  AUC=0.676 (var_ratio=0.41)  level=0.153
+  confident                  P(yes) bad=0.232 good=0.074  d'=+0.574  AUC=0.652 (var_ratio=0.52)  level=0.153
+  confident_extra_neutral    P(yes) bad=0.144 good=0.026  d'=+0.551  AUC=0.674 (var_ratio=0.36)  level=0.085
+  unsupported_claims         P(yes) bad=0.156 good=0.024  d'=+0.602  AUC=0.664 (var_ratio=0.28)  level=0.090
+  hedged -> unsupported_claims:  d d'=-0.077 [-0.239, +0.064]   d AUC=-0.012 [-0.047, +0.022]   d level=-0.063 [-0.092, -0.040]
+  -> uniform belief drop (lower bar)
+
+=== gemma-2-9b-it ===
+  hedged                     P(yes) bad=0.587 good=0.388  d'=+0.478  AUC=0.646 (var_ratio=0.91)  level=0.487
+  confident                  P(yes) bad=0.593 good=0.402  d'=+0.453  AUC=0.650 (var_ratio=0.93)  level=0.498
+  confident_extra_neutral    P(yes) bad=0.548 good=0.358  d'=+0.452  AUC=0.632 (var_ratio=0.92)  level=0.453
+  unsupported_claims         P(yes) bad=0.480 good=0.296  d'=+0.434  AUC=0.633 (var_ratio=0.89)  level=0.388
+  hedged -> unsupported_claims:  d d'=-0.044 [-0.199, +0.105]   d AUC=-0.013 [-0.044, +0.017]   d level=-0.100 [-0.140, -0.063]
+  -> uniform belief drop (lower bar)
+
+=== Meta-Llama-3.1-8B-Instruct ===
+  hedged                     P(yes) bad=0.286 good=0.192  d'=+0.514  AUC=0.625 (var_ratio=0.70)  level=0.239
+  confident                  P(yes) bad=0.278 good=0.180  d'=+0.542  AUC=0.636 (var_ratio=0.70)  level=0.229
+  confident_extra_neutral    P(yes) bad=0.224 good=0.152  d'=+0.442  AUC=0.603 (var_ratio=0.67)  level=0.188
+  unsupported_claims         P(yes) bad=0.202 good=0.132  d'=+0.500  AUC=0.607 (var_ratio=0.58)  level=0.167
+  hedged -> unsupported_claims:  d d'=-0.014 [-0.119, +0.070]   d AUC=-0.018 [-0.055, +0.016]   d level=-0.072 [-0.088, -0.056]
+  -> uniform belief drop (lower bar)

@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Long bios overflow the profile card layout. Truncate bios to at most 200 characters in profile_card.py.",
+  "paired_patch": "patch_009",
+  "bug_type": "encoding_error",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "Slicing at the string level (`bio[:200]`) operates on Unicode code points. The result is always a well-formed string of at most 200 characters regardless of per-character byte width. No multi-byte sequence can be split and no UnicodeDecodeError can occur."
+}

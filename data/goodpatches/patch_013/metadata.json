@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Tenants need per-tenant settings without duplicating the whole base configuration. Apply tenant overrides on top of the base config in tenant_config.py.",
+  "paired_patch": "patch_013",
+  "bug_type": "shallow_copy",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "`copy.deepcopy` creates fully independent copies of all nested structures. Mutating `config[section]` in any tenant's call cannot touch `self.base_config` or another tenant's dict, so cross-tenant configuration bleed is impossible."
+}

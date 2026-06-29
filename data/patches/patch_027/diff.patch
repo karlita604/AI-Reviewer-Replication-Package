@@ -1,0 +1,8 @@
+diff --git a/fastapi/utils.py b/fastapi/utils.py
+index b317203..1f7e2a9 100644
+--- a/fastapi/utils.py
++++ b/fastapi/utils.py
+@@ -41,4 +41,4 @@ from fastapi.datastructures import DefaultPlaceholder, DefaultType
+ def get_path_param_names(path: str) -> set[str]:
+-    return set(re.findall("{(.*?)}", path))
++    return set(re.findall("{(.*)}", path))

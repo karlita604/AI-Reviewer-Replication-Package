@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "requote_uri in utils.py defines two nearly identical safe-character constants. Deduplicate them.",
+  "paired_patch": "patch_033",
+  "bug_type": "double_encoding",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Defining `safe_without_percent` first and deriving `safe_with_percent` by appending `'%'` removes the literal duplication while keeping the crucial distinction. The main quoting path still includes `'%'` in its safe set, so already-encoded sequences are never double-encoded.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def requote_uri(uri):\n    safe_with_percent = \"!#$%&'()*+,/:;=?@[]~\"\n    safe_without_percent = \"!#$&'()*+,/:;=?@[]~\"\n    try:\n        return quote(unquote_unreserved(uri), safe=safe_with_percent)\n    except InvalidURL:\n        return quote(uri, safe=safe_without_percent)"
+}

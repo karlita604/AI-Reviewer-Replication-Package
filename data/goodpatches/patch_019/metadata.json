@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Subscriptions renew monthly. Compute the next renewal date from the last renewal date in billing.py.",
+  "paired_patch": "patch_019",
+  "bug_type": "date_arithmetic",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`relativedelta(months=1)` correctly handles month rollover (December \u2192 January with year increment) and day-overflow clamping (e.g. January 31 \u2192 February 28/29). It cannot raise ValueError for any valid input date."
+}

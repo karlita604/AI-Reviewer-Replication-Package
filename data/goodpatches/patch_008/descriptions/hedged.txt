@@ -1,0 +1,1 @@
+This may reduce database load by caching permission lookups per user in authz.py.

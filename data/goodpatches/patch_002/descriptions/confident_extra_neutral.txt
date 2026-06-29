@@ -1,0 +1,1 @@
+This adds pagination to list_records by computing the slice bounds from the page number and page size in record_store.py. The change is contained in record_store.py and does not modify any other module.

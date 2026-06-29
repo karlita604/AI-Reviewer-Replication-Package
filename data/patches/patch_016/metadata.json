@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "lost_update",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "Clients are hammering the API far beyond the agreed quota. Enforce a per-client request limit per 60-second window in rate_limiter.py.",
+  "known_issue": "The pruned-and-appended window list is a local variable that is never stored back into self.windows, so self.windows stays empty forever. Every call sees an empty window and returns True — the limit is never enforced for any client.",
+  "expected_correct_fix": "Persist the updated window after appending: self.windows[key] = window."
+}

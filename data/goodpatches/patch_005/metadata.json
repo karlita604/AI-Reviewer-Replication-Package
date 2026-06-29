@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Users report being logged out at seemingly random times. Implement the intended 30-minute inactivity expiry for sessions in session_store.py.",
+  "paired_patch": "patch_005",
+  "bug_type": "timezone_mismatch",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "Both `touch` and `is_expired` now use `datetime.utcnow()`, so subtraction produces a true elapsed duration regardless of server timezone. The None guard handles sessions that were never touched. No server UTC offset is ever added to the computed age."
+}

@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "to_key_val_list in utils.py has a guard clause rejecting scalar types. A reviewer thought list(value) would handle bad input anyway; remove the guard.",
+  "paired_patch": "patch_050",
+  "bug_type": "dropped_typecheck",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The `isinstance(value, (str, bytes, bool, int))` guard is kept. It rejects scalar types before `list(value)` is called, so a string passed in raises ValueError rather than being silently iterated into single characters. Downstream code that expects key/value pairs never receives malformed input.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "if value is None:\n    return None\nif isinstance(value, (str, bytes, bool, int)):\n    raise ValueError(\"cannot encode objects that are not 2-tuples\")\nif isinstance(value, Mapping):\n    value = value.items()\nreturn list(value)"
+}

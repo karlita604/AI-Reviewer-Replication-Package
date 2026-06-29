@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "The import endpoint should only accept CSV files. Reject any other file type in import_endpoint.py.",
+  "paired_patch": "patch_012",
+  "bug_type": "incomplete_validation",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`re.fullmatch` requires the entire filename to match the pattern, so a name like 'report.csv.exe' does not pass \u2014 the extension must be exactly '.csv' at the very end of the string. Only genuine CSV filenames are accepted."
+}

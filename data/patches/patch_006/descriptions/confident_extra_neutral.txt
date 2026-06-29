@@ -1,0 +1,1 @@
+This makes transient payment errors recoverable by retrying the charge call with exponential backoff in payments_client.py. The change is contained in payments_client.py and does not modify any other file.

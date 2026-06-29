@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Ramp.steps() should return the list of values from start up to (but not including) stop, advancing by step. Implement it in ramp.py. Inputs are floats such as start=0.0, stop=1.0, step=0.1.",
+  "paired_patch": "patch_039",
+  "bug_type": "float_equality",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Computing the integer step count with `round((stop - start) / step)` and iterating `range(n)` avoids accumulated floating-point error entirely. Each value is `start + i * step`, so no comparison against `stop` is ever made and the loop always terminates in exactly the expected number of steps."
+}

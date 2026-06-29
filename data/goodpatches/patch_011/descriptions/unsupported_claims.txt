@@ -1,0 +1,1 @@
+This allows optional labels on alerts by adding a labels parameter to create_alert in alerting.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

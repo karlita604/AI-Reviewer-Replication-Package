@@ -1,0 +1,9 @@
+diff --git a/auth_views.py b/auth_views.py
+index 1c7f9a3..6b2e8d4 100644
+--- a/auth_views.py
++++ b/auth_views.py
+@@ -44,5 +44,5 @@ class AuthViews:
+     def login_success(self, request, user):
+         session.set_user(user)
+-        return redirect("/")
++        return redirect(request.args.get("next", "/"))

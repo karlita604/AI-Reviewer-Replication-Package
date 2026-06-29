@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Users can request files from their personal upload directory by name. Implement FileDownload.read() to return the contents of the named file under the user's base directory in file_download.py.",
+  "paired_patch": "patch_037",
+  "bug_type": "path_traversal",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "`os.path.realpath` resolves symlinks and `..` components on both the base and the requested path. The startswith check confirms the resolved path is strictly inside the user's directory. Absolute filenames and traversal sequences that escape the base are rejected before any file is opened."
+}

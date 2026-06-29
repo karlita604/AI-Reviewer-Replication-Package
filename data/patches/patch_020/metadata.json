@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "inconsistent_normalization",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The same email address keeps getting registered multiple times with different capitalisation. Prevent duplicate registrations for the same email in registration.py.",
+  "known_issue": "The duplicate check uses the raw email but the store keeps the lowercased form, so the lookup and the insert disagree: registering Bob@x.com twice passes the check both times (raw \"Bob@x.com\" is never in a set containing only \"bob@x.com\") — exactly the capitalisation duplicates the task describes.",
+  "expected_correct_fix": "Normalise before the check: key = email.lower(); if key in self.registered: raise; self.registered.add(key)."
+}

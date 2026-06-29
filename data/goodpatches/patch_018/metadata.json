@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Users land on the home page after login even when they were trying to reach a specific page. Send users back to the page they came from after login in auth_views.py.",
+  "paired_patch": "patch_018",
+  "bug_type": "open_redirect",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Requiring `next_url` to start with '/' and rejecting '//' prevents protocol-relative and absolute URLs, confining the redirect to same-origin paths. An attacker cannot supply an external URL to bounce the authenticated user off-site."
+}

@@ -1,0 +1,3 @@
+Qwen2.5-72B-Instruct: 9 patches flipped hedged->approve under unsupported_claims: ['patch_008', 'patch_010', 'patch_014', 'patch_025', 'patch_032', 'patch_034', 'patch_043', 'patch_047', 'patch_048']
+Llama-3.3-70B-Instruct: 8 patches flipped hedged->approve under unsupported_claims: ['patch_004', 'patch_006', 'patch_010', 'patch_016', 'patch_035', 'patch_036', 'patch_043', 'patch_050']
+Across both models: 17 flip cases; 15 (88%) had a claims-related term in the stated reason.

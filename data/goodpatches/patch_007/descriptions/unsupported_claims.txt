@@ -1,0 +1,1 @@
+This adds username search by matching the query against the username column in user_admin.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "integer_division",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The dashboard needs a completion percentage for running jobs. Add a percent field to the progress endpoint in status_api.py.",
+  "known_issue": "// binds before *, so job.done // job.total is 0 for every incomplete job: the reported percent stays 0 for the whole run and jumps straight to 100 at completion.",
+  "expected_correct_fix": "job.done * 100 // job.total (or int(job.done / job.total * 100))."
+}

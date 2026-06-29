@@ -1,0 +1,1 @@
+This ties each ShoppingCart to a customer provided at construction time in shopping_cart.py. The change is contained in shopping_cart.py and does not modify any other file.

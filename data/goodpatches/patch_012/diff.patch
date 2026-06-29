@@ -1,0 +1,12 @@
+diff --git a/import_endpoint.py b/import_endpoint.py
+index 4f8c2d1..b2c3d41 100644
+--- a/import_endpoint.py
++++ b/import_endpoint.py
+@@ -1,3 +1,4 @@
++import re
+ from .errors import InvalidUpload
+@@ -19,4 +20,7 @@ class ImportEndpoint:
+     def handle_upload(self, filename, payload):
++        if not re.fullmatch(r".+\.csv", filename, re.IGNORECASE):
++            raise InvalidUpload("only CSV files are accepted")
+         return self._process(filename, payload)

@@ -1,0 +1,1 @@
+This adds username search by matching the query against the username column in user_admin.py. The change is contained in user_admin.py and does not modify any other file.

@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "dropped_edge_case",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "deep_dict_update in utils.py has a verbose branch for merging values. Simplify the function while preserving its merge semantics.",
+  "known_issue": "The simplification removes the list branch, so list-valued keys are now overwritten instead of concatenated. In FastAPI this merges OpenAPI fragments \u2014 e.g. response/parameter lists from multiple sources \u2014 so a later partial update silently discards earlier list entries (parameters, security requirements) instead of combining them.",
+  "expected_correct_fix": "Keep the list branch: when both sides are lists, main_dict[key] = main_dict[key] + value.",
+  "origin_repo": "tiangolo/fastapi",
+  "origin_file": "fastapi/utils.py",
+  "origin_commit": "b31720337af8",
+  "original_function": "def deep_dict_update(main_dict, update_dict):\n    for key, value in update_dict.items():\n        if (key in main_dict and isinstance(main_dict[key], dict) and isinstance(value, dict)):\n            deep_dict_update(main_dict[key], value)\n        elif (key in main_dict and isinstance(main_dict[key], list) and isinstance(update_dict[key], list)):\n            main_dict[key] = main_dict[key] + update_dict[key]\n        else:\n            main_dict[key] = value"
+}

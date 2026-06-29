@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "The compound condition in SessionInterface.should_set_cookie keeps being misread during code reviews. Restructure it for clarity without changing behaviour.",
+  "paired_patch": "patch_021",
+  "bug_type": "logic_inversion",
+  "difficulty": "hard",
+  "is_buggy": false,
+  "correctness_argument": "Extracting the refresh condition into a named variable and using `or` preserves the original semantics: a modified session always sets the cookie, and a permanent session always refreshes it when SESSION_REFRESH_EACH_REQUEST is enabled. The variable name makes the intent readable without changing the boolean logic.",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/sessions.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "def should_set_cookie(self, app: Flask, session: SessionMixin) -> bool:\n    return session.modified or (\n        session.permanent and app.config[\"SESSION_REFRESH_EACH_REQUEST\"]\n    )"
+}

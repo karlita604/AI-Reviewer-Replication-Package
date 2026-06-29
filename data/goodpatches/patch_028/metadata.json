@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "unstyle in termui.py delegates to strip_ansi. A reviewer noted the indirection; inline the behaviour directly.",
+  "paired_patch": "patch_028",
+  "bug_type": "no_op_implementation",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The inlined body is exactly `return strip_ansi(text)`, which is what inlining a one-liner means. ANSI escape sequences are removed from the returned string, preserving the documented behaviour for all callers that rely on plain-text output.",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/termui.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "def unstyle(text: str) -> str:\n    \"\"\"Removes ANSI styling information from a string.\"\"\"\n    return strip_ansi(text)"
+}

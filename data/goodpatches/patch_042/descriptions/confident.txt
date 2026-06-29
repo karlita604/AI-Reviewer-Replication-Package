@@ -1,0 +1,1 @@
+This verifies that every user in the list can access the resource in access_check.py.

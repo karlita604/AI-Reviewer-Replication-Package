@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "_posixify in utils.py turns an app name into a posix-friendly token. Simplify the space-to-dash conversion.",
+  "paired_patch": "patch_049",
+  "bug_type": "whitespace_handling",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`'-'.join(name.split()).lower()` splits on any run of whitespace (tabs, multiple spaces, newlines) and collapses them into a single dash. Leading/trailing whitespace is dropped. The resulting token is identical to what the original function always produced, so existing config directories are found unchanged.",
+  "origin_repo": "pallets/click",
+  "origin_file": "src/click/utils.py",
+  "origin_commit": "8a1b1a33d739",
+  "original_function": "def _posixify(name):\n    return \"-\".join(name.split()).lower()"
+}

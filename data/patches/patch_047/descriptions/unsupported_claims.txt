@@ -1,0 +1,1 @@
+This simplifies the charset regex in get_encodings_from_content to a plain greedy group in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

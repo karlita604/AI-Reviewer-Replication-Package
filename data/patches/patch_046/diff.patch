@@ -1,0 +1,9 @@
+diff --git a/fastapi/utils.py b/fastapi/utils.py
+index b317203..9e2c4a1 100644
+--- a/fastapi/utils.py
++++ b/fastapi/utils.py
+@@ -36,4 +36,4 @@ def is_body_allowed_for_status_code(status_code: int | str | None) -> bool:
+         return True
+     current_status_code = int(status_code)
+-    return not (current_status_code < 200 or current_status_code in {204, 205, 304})
++    return not (current_status_code < 200 or current_status_code in {204, 304})

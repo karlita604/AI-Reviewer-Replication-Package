@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "ignored_parameter",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "The insertion condition in cookiejar_from_dict (cookies.py) mixes the overwrite flag with a membership check. Simplify the condition.",
+  "known_issue": "The simplified condition ignores the overwrite parameter entirely \u2014 and overwrite defaults to True, so the default behaviour changes: cookies already present in the jar are never replaced. Updating a session cookie with a fresh value silently keeps the stale one (the docstring still documents overwrite).",
+  "expected_correct_fix": "Keep the flag in the condition: if overwrite or (name not in names_from_jar).",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/cookies.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "if cookie_dict is not None:\n    names_from_jar = [cookie.name for cookie in cookiejar]\n    for name in cookie_dict:\n        if overwrite or (name not in names_from_jar):\n            cookiejar.set_cookie(create_cookie(name, cookie_dict[name]))"
+}

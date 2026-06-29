@@ -1,0 +1,1 @@
+This counts the ERROR lines across all given log files in log_scanner.py.

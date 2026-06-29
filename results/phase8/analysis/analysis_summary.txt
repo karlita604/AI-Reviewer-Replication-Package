@@ -1,0 +1,58 @@
+=== RQ1: Framing effect vs baseline randomness ===
+Baseline change rate (hedged, 5 runs): 0.074
+Framing change rate (hedged vs confident): 0.117
+Framing change rate (hedged vs confident_extra_neutral): 0.190
+Framing change rate (hedged vs unsupported_claims): 0.233
+
+=== RQ2/3: Approval rates by condition (with 95% CI) ===
+                     model               condition   n  n_approved  approval_rate  ci_lower  ci_upper
+Meta-Llama-3.1-8B-Instruct               confident 250         194          0.776     0.720     0.823
+Meta-Llama-3.1-8B-Instruct confident_extra_neutral 250         215          0.860     0.812     0.898
+Meta-Llama-3.1-8B-Instruct                  hedged 250         163          0.652     0.591     0.708
+Meta-Llama-3.1-8B-Instruct      unsupported_claims 250         214          0.856     0.807     0.894
+      Qwen2.5-14B-Instruct               confident 250          32          0.128     0.092     0.175
+      Qwen2.5-14B-Instruct confident_extra_neutral 250          34          0.136     0.099     0.184
+      Qwen2.5-14B-Instruct                  hedged 250          26          0.104     0.072     0.148
+      Qwen2.5-14B-Instruct      unsupported_claims 250          48          0.192     0.148     0.245
+      Qwen2.5-32B-Instruct               confident 250          43          0.172     0.130     0.224
+      Qwen2.5-32B-Instruct confident_extra_neutral 250          40          0.160     0.120     0.211
+      Qwen2.5-32B-Instruct                  hedged 250          31          0.124     0.089     0.171
+      Qwen2.5-32B-Instruct      unsupported_claims 250          66          0.264     0.213     0.322
+       Qwen2.5-3B-Instruct               confident 250         111          0.444     0.384     0.506
+       Qwen2.5-3B-Instruct confident_extra_neutral 250         135          0.540     0.478     0.601
+       Qwen2.5-3B-Instruct                  hedged 250          75          0.300     0.247     0.359
+       Qwen2.5-3B-Instruct      unsupported_claims 250         183          0.732     0.674     0.783
+       Qwen2.5-7B-Instruct               confident 250         133          0.532     0.470     0.593
+       Qwen2.5-7B-Instruct confident_extra_neutral 250         169          0.676     0.616     0.731
+       Qwen2.5-7B-Instruct                  hedged 250         108          0.432     0.372     0.494
+       Qwen2.5-7B-Instruct      unsupported_claims 250         174          0.696     0.636     0.750
+             gemma-2-9b-it               confident 250         180          0.720     0.661     0.772
+             gemma-2-9b-it confident_extra_neutral 250         196          0.784     0.729     0.831
+             gemma-2-9b-it                  hedged 250         158          0.632     0.571     0.689
+             gemma-2-9b-it      unsupported_claims 250         209          0.836     0.785     0.877
+
+=== Significance (McNemar, paired by patch) ===
+Qwen2.5-14B-Instruct  hedged vs confident:  p=1.0000
+Qwen2.5-14B-Instruct  hedged vs confident_extra_neutral:  p=1.0000
+Qwen2.5-14B-Instruct  hedged vs unsupported_claims:  p=0.1250
+Qwen2.5-14B-Instruct  confident vs unsupported_claims:  p=0.2500
+Qwen2.5-32B-Instruct  hedged vs confident:  p=0.2500
+Qwen2.5-32B-Instruct  hedged vs confident_extra_neutral:  p=0.6250
+Qwen2.5-32B-Instruct  hedged vs unsupported_claims:  p=0.0156
+Qwen2.5-32B-Instruct  confident vs unsupported_claims:  p=0.1250
+Qwen2.5-3B-Instruct  hedged vs confident:  p=0.0312
+Qwen2.5-3B-Instruct  hedged vs confident_extra_neutral:  p=0.0005
+Qwen2.5-3B-Instruct  hedged vs unsupported_claims:  p=0.0000
+Qwen2.5-3B-Instruct  confident vs unsupported_claims:  p=0.0001
+Qwen2.5-7B-Instruct  hedged vs confident:  p=0.0625
+Qwen2.5-7B-Instruct  hedged vs confident_extra_neutral:  p=0.0018
+Qwen2.5-7B-Instruct  hedged vs unsupported_claims:  p=0.0001
+Qwen2.5-7B-Instruct  confident vs unsupported_claims:  p=0.0039
+gemma-2-9b-it  hedged vs confident:  p=0.0312
+gemma-2-9b-it  hedged vs confident_extra_neutral:  p=0.0039
+gemma-2-9b-it  hedged vs unsupported_claims:  p=0.0010
+gemma-2-9b-it  confident vs unsupported_claims:  p=0.0625
+Meta-Llama-3.1-8B-Instruct  hedged vs confident:  p=0.0010
+Meta-Llama-3.1-8B-Instruct  hedged vs confident_extra_neutral:  p=0.0001
+Meta-Llama-3.1-8B-Instruct  hedged vs unsupported_claims:  p=0.0001
+Meta-Llama-3.1-8B-Instruct  confident vs unsupported_claims:  p=0.3750

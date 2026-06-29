@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "bug_type": "logic_inversion",
+  "difficulty": "hard",
+  "is_buggy": true,
+  "task": "The compound condition in SessionInterface.should_set_cookie keeps being misread during code reviews. Restructure it for clarity without changing behaviour.",
+  "known_issue": "The restructuring swaps or/and: a modified non-permanent session (with SESSION_REFRESH_EACH_REQUEST false) no longer triggers Set-Cookie, silently losing session updates; and an unmodified permanent session no longer refreshes its cookie each request, so permanent sessions expire mid-use. Both behaviours the original guaranteed are broken.",
+  "expected_correct_fix": "Keep the original logic: session.modified or (session.permanent and app.config[\"SESSION_REFRESH_EACH_REQUEST\"]).",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/sessions.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "def should_set_cookie(self, app: Flask, session: SessionMixin) -> bool:\n    return session.modified or (\n        session.permanent and app.config[\"SESSION_REFRESH_EACH_REQUEST\"]\n    )"
+}

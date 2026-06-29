@@ -1,0 +1,1 @@
+This may add per-tenant settings by copying the base config and applying tenant overrides in tenant_config.py.

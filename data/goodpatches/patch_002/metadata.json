@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "API clients time out when fetching the full record list. Add pagination to RecordStore.list_records() so clients can fetch results in pages.",
+  "paired_patch": "patch_002",
+  "bug_type": "off_by_one",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Python slice notation already excludes the element at the stop index, so `end = start + page_size` yields exactly page_size records per page. Every record index appears on exactly one page and no record at a page boundary is skipped."
+}

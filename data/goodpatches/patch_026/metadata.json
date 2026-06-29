@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "deep_dict_update in utils.py has a verbose branch for merging values. Simplify the function while preserving its merge semantics.",
+  "paired_patch": "patch_026",
+  "bug_type": "dropped_edge_case",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The list branch is retained inline as a compact single-line elif, so list-valued keys are concatenated rather than overwritten. The function still handles dicts recursively and falls back to assignment for all other types, preserving the full merge semantics.",
+  "origin_repo": "tiangolo/fastapi",
+  "origin_file": "fastapi/utils.py",
+  "origin_commit": "b31720337af8",
+  "original_function": "def deep_dict_update(main_dict, update_dict):\n    for key, value in update_dict.items():\n        if (key in main_dict and isinstance(main_dict[key], dict) and isinstance(value, dict)):\n            deep_dict_update(main_dict[key], value)\n        elif (key in main_dict and isinstance(main_dict[key], list) and isinstance(update_dict[key], list)):\n            main_dict[key] = main_dict[key] + update_dict[key]\n        else:\n            main_dict[key] = value"
+}

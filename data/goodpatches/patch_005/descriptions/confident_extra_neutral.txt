@@ -1,0 +1,1 @@
+This implements the 30-minute inactivity expiry by comparing the session's last activity time against the current time in session_store.py. The change is contained in session_store.py and does not modify any other module.

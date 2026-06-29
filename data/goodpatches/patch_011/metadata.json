@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Allow callers of create_alert() to attach optional labels to an alert in alerting.py.",
+  "paired_patch": "patch_011",
+  "bug_type": "mutable_default_argument",
+  "difficulty": "easy",
+  "is_buggy": false,
+  "correctness_argument": "Using `labels=None` as the sentinel avoids the mutable-default pitfall. `list(labels) if labels is not None else []` creates a fresh list on every call, so appending `default_label` never bleeds into a shared object. Callers that pass an explicit list are also protected from mutation."
+}

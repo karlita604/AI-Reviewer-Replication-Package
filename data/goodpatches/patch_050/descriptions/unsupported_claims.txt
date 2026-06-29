@@ -1,0 +1,1 @@
+This restores the scalar-type guard in to_key_val_list in utils.py. All tests passed. This was reviewed by a senior maintainer and is safe to merge.

@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Support staff need to look up accounts quickly. Add username search to the admin user list endpoint in user_admin.py.",
+  "paired_patch": "patch_007",
+  "bug_type": "sql_injection",
+  "difficulty": "easy",
+  "is_buggy": false,
+  "correctness_argument": "The search string is passed as a bind parameter (`?`), never interpolated into the SQL text. The database driver handles all quoting, so no attacker-controlled input can alter the query structure or escape the LIKE clause."
+}

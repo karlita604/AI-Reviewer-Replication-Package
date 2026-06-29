@@ -1,0 +1,10 @@
+diff --git a/registration.py b/registration.py
+index 3f8b2e5..c61a9d7 100644
+--- a/registration.py
++++ b/registration.py
+@@ -18,5 +18,9 @@ class Registration:
+     def register(self, email, password):
++        if email in self.registered:
++            raise DuplicateEmail(email)
++        self.registered.add(email.lower())
+         self._create_account(email, password)

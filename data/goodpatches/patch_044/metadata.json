@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "get_cookie_path in sessions.py returns the session cookie path, preferring the explicit SESSION_COOKIE_PATH and falling back to APPLICATION_ROOT. Tidy the return expression.",
+  "paired_patch": "patch_044",
+  "bug_type": "swapped_operands",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "`SESSION_COOKIE_PATH or APPLICATION_ROOT` consults the explicit path first. When an app sets SESSION_COOKIE_PATH (e.g. '/admin') it wins; only when it is falsy does APPLICATION_ROOT (typically '/') provide the fallback. The cookie scope matches what the developer configured.",
+  "origin_repo": "pallets/flask",
+  "origin_file": "src/flask/sessions.py",
+  "origin_commit": "36e4a824f340",
+  "original_function": "def get_cookie_path(self, app):\n    return app.config[\"SESSION_COOKIE_PATH\"] or app.config[\"APPLICATION_ROOT\"]"
+}

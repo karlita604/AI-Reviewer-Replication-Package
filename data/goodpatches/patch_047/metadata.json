@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "The charset regex in get_encodings_from_content (utils.py) uses a non-greedy group. Simplify it to a plain greedy group.",
+  "paired_patch": "patch_047",
+  "bug_type": "greedy_regex",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The non-greedy `(.+?)` stops at the first closing quote or `>`, capturing only the encoding token. Greedy `(.+)` would consume up to the last such character on the line, producing a garbage encoding string for any meta tag with trailing attributes or markup.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "charset_re = re.compile(r'<meta.*?charset=[\"\\']*(.+?)[\"\\'>]', flags=re.I)"
+}

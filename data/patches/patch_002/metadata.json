@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "bug_type": "off_by_one",
+  "difficulty": "medium",
+  "is_buggy": true,
+  "task": "API clients time out when fetching the full record list. Add pagination to RecordStore.list_records() so clients can fetch results in pages.",
+  "known_issue": "The slice end is start + page_size - 1, so every page returns page_size - 1 records and the record at each page boundary is silently skipped: with page_size=50, records[49] appears on neither page 1 (indices 0-48) nor page 2 (indices 50-98).",
+  "expected_correct_fix": "end = start + page_size (Python slices already exclude the end index)."
+}

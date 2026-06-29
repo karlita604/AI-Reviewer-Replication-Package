@@ -1,0 +1,1 @@
+This streamlines the import error handling in locate_app in cli.py. The change is contained in cli.py and does not modify any other file.

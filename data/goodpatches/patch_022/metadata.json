@@ -1,0 +1,13 @@
+{
+  "source": "injected",
+  "task": "get_auth_from_url in utils.py relies on catching AttributeError/TypeError to handle URLs without credentials. Refactor it to handle the missing-credential case directly.",
+  "paired_patch": "patch_022",
+  "bug_type": "dropped_decoding",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "The None-handling is done inline with `or ''`, eliminating the try/except, while `unquote()` is kept on both fields. Percent-encoded credentials (e.g. `user%40example.com`) are decoded correctly, preserving the original function's behaviour for all inputs.",
+  "origin_repo": "psf/requests",
+  "origin_file": "src/requests/utils.py",
+  "origin_commit": "6f66281a1d63",
+  "original_function": "def get_auth_from_url(url: str) -> tuple[str, str]:\n    parsed = urlparse(url)\n    try:\n        # except handles parsed.username/password being None\n        auth = (unquote(parsed.username), unquote(parsed.password))\n    except (AttributeError, TypeError):\n        auth = (\"\", \"\")\n    return auth"
+}

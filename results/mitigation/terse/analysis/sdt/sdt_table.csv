@@ -1,0 +1,17 @@
+model,condition,hit_rate,fa_rate,d_prime,criterion
+Qwen/Qwen2.5-14B-Instruct,hedged,0.9622,0.9143,0.4082,-1.5721
+Qwen/Qwen2.5-14B-Instruct,unsupported_claims,0.998,0.9741,0.9346,-2.4121
+Qwen/Qwen2.5-32B-Instruct,hedged,0.9263,0.7112,0.892,-1.0028
+Qwen/Qwen2.5-32B-Instruct,unsupported_claims,0.9104,0.6912,0.8436,-0.9212
+Qwen/Qwen2.5-3B-Instruct,hedged,0.7789,0.7988,-0.0689,-0.8029
+Qwen/Qwen2.5-3B-Instruct,unsupported_claims,0.5916,0.6554,-0.1681,-0.3158
+Qwen/Qwen2.5-72B-Instruct,hedged,0.8068,0.3287,1.3096,-0.2113
+Qwen/Qwen2.5-72B-Instruct,unsupported_claims,0.759,0.3167,1.1798,-0.1131
+Qwen/Qwen2.5-7B-Instruct,hedged,0.6833,0.5598,0.3265,-0.3136
+Qwen/Qwen2.5-7B-Instruct,unsupported_claims,0.743,0.6235,0.338,-0.4837
+google/gemma-2-9b-it,hedged,0.4163,0.3207,0.2544,0.3385
+google/gemma-2-9b-it,unsupported_claims,0.3127,0.2371,0.2277,0.6019
+meta-llama/Llama-3.3-70B-Instruct,hedged,0.5159,0.2131,0.8355,0.3778
+meta-llama/Llama-3.3-70B-Instruct,unsupported_claims,0.5876,0.257,0.8742,0.2156
+meta-llama/Meta-Llama-3.1-8B-Instruct,hedged,0.5637,0.4641,0.2505,-0.0352
+meta-llama/Meta-Llama-3.1-8B-Instruct,unsupported_claims,0.5598,0.4721,0.2203,-0.0402

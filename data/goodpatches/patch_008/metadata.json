@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "Permission checks hit the database on every request and dominate query load. Cache permission lookups in authz.py.",
+  "paired_patch": "patch_008",
+  "bug_type": "stale_cache",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Each cache entry stores permissions alongside a monotonic timestamp. On every access the age is compared against `_CACHE_TTL`; stale entries are evicted and reloaded from the database. A revoked permission takes effect within one TTL window, bounding the security exposure."
+}

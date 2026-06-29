@@ -1,0 +1,9 @@
+{
+  "source": "manual",
+  "task": "The dashboard needs a completion percentage for running jobs. Add a percent field to the progress endpoint in status_api.py.",
+  "paired_patch": "patch_015",
+  "bug_type": "integer_division",
+  "difficulty": "medium",
+  "is_buggy": false,
+  "correctness_argument": "Multiplying by 100 before integer-dividing ensures the numerator is large enough to produce a meaningful percentage for any in-progress job. `job.done * 100 // job.total` correctly yields 0 at the start and 100 at completion, with sensible intermediate values throughout."
+}

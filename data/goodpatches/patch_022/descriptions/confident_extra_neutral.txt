@@ -1,0 +1,1 @@
+This reworks get_auth_from_url to handle missing credentials directly instead of via exception handling in utils.py. The change is contained in utils.py and does not modify any other file.
