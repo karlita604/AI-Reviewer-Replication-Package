@@ -1,0 +1,15 @@
+# Install torch FIRST with the CUDA build for your machine, e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+torch
+transformers>=4.45,<5     # v5 removed the load_in_4bit/torch_dtype kwargs used in src/reviewer.py
+accelerate>=0.34
+bitsandbytes              # 4-bit loading for the 70B reviewers
+hydra-core==1.3.2
+omegaconf
+pandas
+numpy
+scipy
+statsmodels               # GEE logistic regression (src/regression.py)
+matplotlib
+seaborn
+anthropic                 # closed reviewer + detection judge (src/api_reviewer.py, src/judge_detection.py)
