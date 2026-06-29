@@ -1,0 +1,6 @@
+patch_number,note
+patch_004,"Minimal fix uses `ConnectionError` as the caught type, but the actual exception class raised by `self.client` is unknown from context alone. A cleaner implementation would catch the specific exception class exported by the metrics-client library."
+patch_008,"Minimal TTL cache stores `(perms, timestamp)` tuples. A cleaner alternative is `from cachetools import TTLCache; self._cache = TTLCache(maxsize=1024, ttl=60)`, which handles expiry transparently without manual timestamp comparisons."
+patch_018,"Minimal redirect guard uses `startswith('/')` + `startswith('//')`. A cleaner alternative parses the URL with `urllib.parse.urlparse` and rejects any result with a non-empty `scheme` or `netloc`, which is more robust and self-documenting."
+patch_019,"Minimal fix uses `dateutil.relativedelta`, which adds a third-party dependency. A zero-dependency alternative: compute `month = last.month % 12 + 1; year = last.year + last.month // 12; day = min(last.day, calendar.monthrange(year, month)[1]); return last.replace(year=year, month=month, day=day)`."
+patch_039,"Minimal fix uses `round((stop - start) / step)`. An alternative that avoids the round call is `while x < stop - 1e-9: values.append(x); x += step`, which is simpler but accumulates float error. The integer-count approach is generally preferable."

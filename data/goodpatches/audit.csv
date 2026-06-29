@@ -1,0 +1,51 @@
+patch_id,fits_good_diff,reason
+patch_001,yes,"Resolved 2026-06-18: description rewritten to 'null check on both the key and the value' to match the good diff. Originally said 'null check on the key' only (described the bad patch's incomplete fix)."
+patch_002,yes,
+patch_003,yes,
+patch_004,yes,
+patch_005,yes,
+patch_006,yes,
+patch_007,yes,
+patch_008,yes,
+patch_009,yes,
+patch_010,yes,
+patch_011,yes,
+patch_012,yes,
+patch_013,yes,
+patch_014,yes,
+patch_015,yes,
+patch_016,yes,
+patch_017,yes,
+patch_018,yes,
+patch_019,yes,
+patch_020,yes,
+patch_021,yes,
+patch_022,yes,
+patch_023,yes,
+patch_024,yes,
+patch_025,yes,"Resolved: description rewritten to 'removing verbose legacy browser comments while preserving the UNC-path guard' to match the good diff. Originally said 'removing the legacy browser special-casing' (described the bad patch)."
+patch_026,yes,"Resolved 2026-06-18: description rewritten to 'adds a list-merge branch so matching lists are concatenated' to match the good diff. Originally said 'collapsing the value-merge branches' (implied reducing branches, the bad patch's change)."
+patch_027,yes,"Resolved 2026-06-18: description rewritten to 'switches the path-parameter regex to a non-greedy quantifier' to match the good diff. Originally said 'simplifies the regex' (implied the greedy change the bad patch made)."
+patch_028,yes,
+patch_029,yes,"Resolved: description rewritten to 'early return for the bytes branch' (keeps the encode/decode round-trip) to match the good diff. Originally said 'returning the filename as a string' (described the bad patch's return str(filename))."
+patch_030,yes,"Resolved: description rewritten to 'list comprehension over urllib3's parsed items' to match the good diff. Originally said 'replaces urllib3 parsing with a direct comma split' (exactly backwards)."
+patch_031,yes,
+patch_032,yes,"Resolved: description rewritten to 'single-line fallback expression' (os.environ.get(key) or expanduser) to match the good diff. Originally said 'a direct environment lookup' (described the bad patch's bracket access)."
+patch_033,yes,
+patch_034,yes,
+patch_035,yes,"Resolved: description rewritten to 'respect the overwrite parameter' to match the good diff. Originally said 'simplifies the cookie insertion condition' (the good diff restores the overwrite flag, making it more complex)."
+patch_036,yes,"Resolved: description rewritten to 'only assign the fallback scheme when none is already present' to match the good diff. Originally said 'simplifies the scheme assignment' (the good diff adds back the if scheme is None guard)."
+patch_037,yes,
+patch_038,yes,
+patch_039,yes,
+patch_040,yes,
+patch_041,yes,
+patch_042,yes,
+patch_043,yes,
+patch_044,yes,
+patch_045,yes,"Resolved: description rewritten to 'adds a JSON charset branch to return UTF-8' to match the good diff. Originally said 'trims the JSON charset branch' (the exact inverse)."
+patch_046,yes,
+patch_047,yes,"Resolved: description rewritten to 'use a non-greedy quantifier' to match the good diff. Originally said 'simplifies … to a plain greedy group' (the opposite, the bad patch's change)."
+patch_048,yes,
+patch_049,yes,"Resolved 2026-06-18: description rewritten to 'collapse all whitespace using split and join' to match the good diff. Originally said 'simplifies the space-to-dash conversion' (borderline — the good diff's -join(split()) is arguably not simpler than the bad patch's replace())."
+patch_050,yes,"Resolved: description rewritten to 'restores the scalar-type guard' to match the good diff. Originally said 'removes the scalar-type guard' (literally the opposite)."
