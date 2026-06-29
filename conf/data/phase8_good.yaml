@@ -1,0 +1,14 @@
+# @package _global_
+# Output area for the Phase 8 good-patch control set (small-model SDT).
+# The 50 good patches in data/goodpatches are paired 1:1 with the bad set;
+# running them on the same six small models supplies the false-alarm side
+# (approvals of correct code) needed for signal-detection analysis — d-prime
+# (sensitivity) vs criterion (bias). Separate output area so the good and bad
+# small-model reviews never mix, mirroring how phase8 is kept apart from the
+# committed 70B record.
+data:
+  patches_dir: data/goodpatches
+  results_dir: results/phase8_good
+  raw_dir: results/phase8_good/raw
+  verdicts_file: results/phase8_good/verdicts.csv
+  bug_question_dir: results/phase8_good/bug_question

@@ -1,0 +1,21 @@
+# @package _global_
+# Phase 6b experiment 2: problems before verdict.
+#
+# Identical to the main study except (a) the JSON answer format puts the
+# problems list first and the verdict last, so the model lists problems
+# before it commits to a decision, and (b) only the two conditions that
+# carry the effect are rerun (hedged as reference, unsupported_claims as
+# treatment): 50 patches x 2 conditions x 5 runs x 2 models = 1,000 reviews.
+# If the bug is mentioned more often under the claims once the problems list
+# comes first, the original suppression happened at the reporting stage.
+experiment:
+  n_runs: 5
+  answer_order: problems_first
+  conditions:
+    - hedged
+    - unsupported_claims
+  valid_verdicts:
+    - approve
+    - request_changes
+    - reject
+    - insufficient_information

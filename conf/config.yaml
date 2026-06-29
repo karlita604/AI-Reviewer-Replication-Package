@@ -1,0 +1,21 @@
+# Top-level Hydra config. Composes model, experiment, and data groups.
+# Override anything from the CLI without editing files, e.g.:
+#   python run_experiment.py model=qwen2_5_72b
+#   python run_experiment.py mode=consolidate
+#   python run_experiment.py mode=count_trials
+defaults:
+  - model: llama3_70b       # -> conf/model/llama3_70b.yaml
+  - experiment: default     # -> conf/experiment/default.yaml
+  - data: default           # -> conf/data/default.yaml
+  - _self_
+
+seed: 42
+mode: run   # run | consolidate | count_trials — override with mode=consolidate
+
+# Hydra output dirs — do NOT chdir so relative paths stay stable
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: outputs/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

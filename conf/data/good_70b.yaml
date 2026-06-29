@@ -1,0 +1,12 @@
+# @package _global_
+# 70B good-patch outputs (Phase 7). The good-patch verdict run used inline
+# overrides (slurm/run_good_array.sbatch); this config covers the good
+# bug-question probe on the two 70B reviewers, which the belief-based SDT
+# needs. Kept separate from the small-model phase8_good area and from the
+# bad-patch bug-question at results/bug_question.
+data:
+  patches_dir: data/goodpatches
+  results_dir: results/good
+  raw_dir: results/good_raw
+  verdicts_file: results/good_verdicts.csv
+  bug_question_dir: results/good_bug_question

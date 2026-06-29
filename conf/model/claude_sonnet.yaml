@@ -1,0 +1,11 @@
+# @package _global_
+# Closed-model reviewer extension (docs/FRONTIER-PLAN.md). Inference is over the
+# Anthropic API at full precision, so there is no device_map or 4-bit load. The
+# `api` field routes run_experiment through APIReviewer instead of the HF
+# pipeline. Requires `pip install anthropic` and ANTHROPIC_API_KEY in the env.
+model:
+  name: claude-sonnet-4-6   # Anthropic API model string (Claude Sonnet 4.6)
+  api: anthropic            # selects src/api_reviewer.APIReviewer
+  max_new_tokens: 512       # same cap as the open-weight reviewers
+  temperature: 0.7          # match the main study
+  supports_system_role: true

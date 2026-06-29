@@ -1,0 +1,15 @@
+# @package _global_
+# Phase 11 Arm B — claim-discount instruction (docs/MITIGATION-PLAN.md §4).
+# Two-condition efficacy contrast (hedged vs unsupported_claims); the system
+# prompt tells the reviewer to give unverifiable validation claims no weight.
+experiment:
+  n_runs: 5
+  prompt_variant: claim_discount
+  conditions:
+    - hedged
+    - unsupported_claims
+  valid_verdicts:
+    - approve
+    - request_changes
+    - reject
+    - insufficient_information

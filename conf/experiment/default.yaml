@@ -1,0 +1,24 @@
+# @package _global_
+experiment:
+  # Runs per condition (applies to ALL conditions, including baseline)
+  # This lets us estimate approval probability per condition, not just a single verdict.
+  n_runs: 5
+
+  # Framing conditions — filenames must match descriptions/<condition>.txt
+  # confident_extra_neutral controls for "extra text" vs "authoritative claim"
+  # so we can separate the two effects in unsupported_claims.
+  #
+  # TODO (later): consider richer patch metadata schema (why_the_patch_is_wrong,
+  # minimal_failing_test, expected_correct_fix) to strengthen patch validity.
+  conditions:
+    - hedged
+    - confident
+    - confident_extra_neutral
+    - unsupported_claims
+
+  # Structured verdict options enforced via the reviewer prompt
+  valid_verdicts:
+    - approve
+    - request_changes
+    - reject
+    - insufficient_information

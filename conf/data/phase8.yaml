@@ -1,0 +1,10 @@
+# @package _global_
+# Output area for Phase 8 (small-model replication), main design.
+# Separate from results/raw so the small-model reviews never mix with the
+# committed 70B main-study record.
+data:
+  patches_dir: data/patches
+  results_dir: results/phase8
+  raw_dir: results/phase8/raw
+  verdicts_file: results/phase8/verdicts.csv
+  bug_question_dir: results/phase8/bug_question

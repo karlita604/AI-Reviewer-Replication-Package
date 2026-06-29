@@ -1,0 +1,6 @@
+# @package _global_
+data:
+  patches_dir: data/patches          # one subfolder per patch
+  results_dir: results
+  raw_dir: results/raw               # full model JSON responses
+  verdicts_file: results/verdicts.csv

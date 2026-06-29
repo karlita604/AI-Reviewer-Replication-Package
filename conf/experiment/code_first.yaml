@@ -1,0 +1,22 @@
+# @package _global_
+# Phase 6b experiment 3: code before description.
+#
+# Identical to the main study except the user prompt is ordered
+# Task -> Code Diff -> PR Description, so the model reads the code before it
+# sees the claims. The answer format stays verdict-first, so input order is
+# the only variable. 50 patches x 2 conditions x 5 runs x 2 models = 1,000
+# reviews. The blind explanation predicts the claims effect shrinks (the code
+# was read before the claims could color it); the silent explanation predicts
+# it survives. After experiments 1-2 the prediction is per model: Llama
+# (blind) should shrink, Qwen (silent) should not.
+experiment:
+  n_runs: 5
+  context_order: code_first
+  conditions:
+    - hedged
+    - unsupported_claims
+  valid_verdicts:
+    - approve
+    - request_changes
+    - reject
+    - insufficient_information

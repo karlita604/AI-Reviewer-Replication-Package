@@ -1,0 +1,13 @@
+# @package _global_
+# Phase 8 optional third family: Gemma 2, 9B scale.
+# Gemma-2's chat template has no system role; the system prompt is folded
+# into the user turn (see chat_messages in src/reviewer.py). Same text,
+# different message structure — a caveat to note when comparing families.
+model:
+  name: google/gemma-2-9b-it
+  dtype: bfloat16
+  max_new_tokens: 512
+  temperature: 0.7
+  device_map: auto
+  load_in_4bit: false   # fits in bf16 on one H100 80GB
+  supports_system_role: false

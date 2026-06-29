@@ -1,0 +1,7 @@
+# @package _global_
+# Phase 11 Arm C (diff-only) on the 50 known-good patches.
+data:
+  patches_dir: data/goodpatches
+  results_dir: results/mitigation/diff_only/good
+  raw_dir: results/mitigation/diff_only/good/raw
+  verdicts_file: results/mitigation/diff_only/good/verdicts.csv

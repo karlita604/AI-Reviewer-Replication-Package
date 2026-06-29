@@ -1,0 +1,7 @@
+# @package _global_
+# Phase 11 Arm B2 (terse claim-discount) on the 50 known-good patches (RQ-M2).
+data:
+  patches_dir: data/goodpatches
+  results_dir: results/mitigation/terse/good
+  raw_dir: results/mitigation/terse/good/raw
+  verdicts_file: results/mitigation/terse/good/verdicts.csv

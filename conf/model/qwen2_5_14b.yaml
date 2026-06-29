@@ -1,0 +1,9 @@
+# @package _global_
+# Phase 8 scaling curve: Qwen family, 14B scale.
+model:
+  name: Qwen/Qwen2.5-14B-Instruct
+  dtype: bfloat16
+  max_new_tokens: 512
+  temperature: 0.7
+  device_map: auto
+  load_in_4bit: false   # fits in bf16 on one H100 80GB

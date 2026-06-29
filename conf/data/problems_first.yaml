@@ -1,0 +1,9 @@
+# @package _global_
+# Output area for Phase 6b experiment 2 (problems before verdict).
+# Separate from results/raw so the reordered reviews never mix with the
+# main study's verdict-first reviews.
+data:
+  patches_dir: data/patches
+  results_dir: results/problems_first
+  raw_dir: results/problems_first/raw
+  verdicts_file: results/problems_first/verdicts.csv
