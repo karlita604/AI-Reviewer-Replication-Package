@@ -1,6 +1,6 @@
 # @package _global_
 # Closed-model reviewer extension — paired verified-good patches
-# (docs/FRONTIER-PLAN.md). Supplies the false-alarm rate for the verdict-based
+# (protocols/FRONTIER-PLAN.md). Supplies the false-alarm rate for the verdict-based
 # signal-detection decomposition of the Sonnet reviewer.
 data:
   patches_dir: data/goodpatches

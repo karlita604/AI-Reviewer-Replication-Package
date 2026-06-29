@@ -57,7 +57,7 @@ ANSWER_ORDER_PROMPTS = {
     "problems_first": PROBLEMS_FIRST_SYSTEM_PROMPT,
 }
 
-# Phase 11 mitigation arms (docs/MITIGATION-PLAN.md). The JSON schema is
+# Phase 11 mitigation arms (protocols/MITIGATION-PLAN.md). The JSON schema is
 # identical to SYSTEM_PROMPT; only the instruction text and (for diff-only) the
 # inputs change. Wording is locked in the plan — do not edit without an amendment.
 

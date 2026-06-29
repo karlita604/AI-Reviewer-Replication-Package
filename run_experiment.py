@@ -171,7 +171,7 @@ def _run_pending(patch: Patch, pending: list[dict], n_trials: int,
     for trial in pending:
         # Seed per trial so each trial is independently reproducible. (No effect
         # on the API reviewer, which the vendor does not let us seed; the raw
-        # response is stored for auditability instead — see docs/FRONTIER-PLAN.md.)
+        # response is stored for auditability instead — see protocols/FRONTIER-PLAN.md.)
         set_seed(trial_seed(cfg, trial))
         print(f"  [trial] condition={trial['condition']} run={trial['run_index']}", flush=True)
         result = reviewer.review(
@@ -206,7 +206,7 @@ def run(patches: list[Patch], cfg: DictConfig) -> None:
 def run_all(patches: list[Patch], cfg: DictConfig) -> None:
     """
     Run every patch in one process, building the reviewer once. This is the
-    no-SLURM path used by the API reviewer (docs/FRONTIER-PLAN.md), and also
+    no-SLURM path used by the API reviewer (protocols/FRONTIER-PLAN.md), and also
     works for a local model when an array job is not wanted.
     """
     reviewer = make_reviewer(cfg)

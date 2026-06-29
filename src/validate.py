@@ -1,7 +1,7 @@
 """
 Authoring-time validation for patches in data/patches/.
 
-Checks every patch against the protocol rules (docs/PROTOCOL.md §1-2):
+Checks every patch against the protocol rules (protocols/PROTOCOL.md §1-2):
 
 Structural (ERROR — must fix before running):
   - diff.patch exists and is non-empty

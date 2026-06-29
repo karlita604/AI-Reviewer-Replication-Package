@@ -1,5 +1,5 @@
 # @package _global_
-# Phase 11 Arm C — diff-only (docs/MITIGATION-PLAN.md §4). The PR description is
+# Phase 11 Arm C — diff-only (protocols/MITIGATION-PLAN.md §4). The PR description is
 # withheld entirely, so hedged and unsupported_claims would be identical inputs;
 # we therefore run a SINGLE cell per patch. The 'hedged' label is just a tag —
 # build_context drops the description when prompt_variant=diff_only.

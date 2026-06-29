@@ -5,7 +5,7 @@ Adapts the SWE-PRBench judge protocol (arXiv:2603.26130) to our
 single-known-issue patches: each raw review is scored CAUGHT or MISSED
 against the patch's `known_issue`. The judge never sees the reviewer's
 verdict, so detection cannot leak from the approval decision.
-See docs/JUDGE-PROTOCOL.md for the full rubric and validation plan.
+See protocols/JUDGE-PROTOCOL.md for the full rubric and validation plan.
 
 Usage:
     python src/judge_detection.py dry-run            # print one judge prompt, no API call

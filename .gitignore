@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Hydra outputs (generated during runs, not part of the package)
+outputs/
+
+# Slurm logs (generated at runtime)
+slurm/logs/
+
+# Raw trial JSON (too large to ship; regenerate with run_experiment.py)
+results/raw*/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Convenience scripts (not part of the research package)
+*.ps1
+*.bat

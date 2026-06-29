@@ -9,7 +9,7 @@ differences are that inference happens over the Anthropic API instead of a local
 HuggingFace pipeline, and that Anthropic takes the system prompt as a top-level
 argument rather than as a message with role "system".
 
-Design choices are locked in docs/FRONTIER-PLAN.md:
+Design choices are locked in protocols/FRONTIER-PLAN.md:
   - full set of four conditions, 5 runs, temperature 0.7;
   - the verdict-free bug-question probe is NOT run for the API model (the API
     does not expose token log-probabilities), so this module implements the

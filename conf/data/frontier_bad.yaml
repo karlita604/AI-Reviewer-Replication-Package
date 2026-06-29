@@ -1,5 +1,5 @@
 # @package _global_
-# Closed-model reviewer extension — known-bad patches (docs/FRONTIER-PLAN.md).
+# Closed-model reviewer extension — known-bad patches (protocols/FRONTIER-PLAN.md).
 # Reuses the 50 known-bad patches but writes to a fresh results/frontier tree so
 # the main-study record is never touched.
 data:

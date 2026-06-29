@@ -1,5 +1,5 @@
 """
-Human validation sample for the detection judge (docs/JUDGE-PROTOCOL.md).
+Human validation sample for the detection judge (protocols/JUDGE-PROTOCOL.md).
 
 Draws a stratified sample of judged trials (model x condition x judge label,
 fixed seed), hiding the judge's label, the condition, the reviewer model, and
@@ -90,7 +90,7 @@ def cmd_generate(args) -> None:
     header = """\
 # Detection judge validation - coding sheet
 
-Code each review CAUGHT or MISSED per the rubric in docs/JUDGE-PROTOCOL.md:
+Code each review CAUGHT or MISSED per the rubric in protocols/JUDGE-PROTOCOL.md:
 
 - **CAUGHT**: the review identifies the same underlying issue as the known
   bug (same root cause, same functional area, and the requested changes

@@ -27,31 +27,41 @@ prompt-ordering ablation, which is not part of this paper, is also omitted.
 ```
 replication-package/
   README.md                 This file.
-  LICENSE                   License (placeholder; see note at end).
+  LICENSE                   Code license (MIT).
+  LICENSE-DATA.md           Dataset license (CC-BY-4.0).
+  THIRD-PARTY-NOTICES.md    Licenses for injected OSS patches.
   requirements.txt          Python dependencies.
-  run_experiment.py         Harness entrypoint for the open-weight reviewers.
   pyproject.toml            Project metadata and core dependencies.
+  run_experiment.py         Harness entrypoint for the open-weight reviewers.
   src/                      Reviewer harness and all analysis scripts (see below).
   conf/                     Hydra configuration (models, data, experiments).
   slurm/                    Cluster launch scripts used for the runs.
+                            NOTE: partition names (dgxh100long, lsrcpushort) are
+                            cluster-specific — substitute your cluster's names.
   data/
     patches/                50 known-bad patches: one folder per patch, each with
                             the task, the four description conditions, the diff,
-                            and bug metadata; plus tracker.csv and audit notes.
+                            and bug metadata; plus tracker.csv.
     goodpatches/            50 matched verified-good patches and their audit.
   results/                  Processed outputs only (no raw JSON):
-    verdicts.csv,           Parsed verdicts for the two 70B reviewers (main study)
-      good_verdicts.csv       on known-bad and verified-good patches.
-    analysis/               Approval rates, GEE odds ratios, change rates,
-                            bug-question probe summary, qualitative flip examples.
-    detection/              Bug-detection (CAUGHT / MISSED) labels.
-    phase8/, phase8_good/   Scale extension: six smaller reviewers, with their
-                            analysis/ and signal-detection (sdt/) tables.
-    frontier/               Closed reviewer (Claude Sonnet): verdicts and SDT.
-    mitigation/             RQ4: per-arm verdicts plus the scorecard and lift
-                            tables under analysis/.
-    bug_question/,          Verdict-free bug-question probe scores.
-      good_bug_question/
+    verdicts.csv            Parsed verdicts for the two 70B reviewers (main study),
+    good_verdicts.csv         known-bad and verified-good patches respectively.
+    analysis/               Approval rates, McNemar, GEE odds ratios, change rates,
+                            bug-question probe summary, qualitative flip examples,
+                            vague-rejection test.
+      sdt/                  Signal-detection (d', beta) tables for main study.
+      good_verdicts/        Per-arm approval and change-rate tables for good patches.
+    detection/              Bug-detection (CAUGHT / MISSED) labels (main study).
+    phase8/                 Scale extension: six smaller reviewers.
+      analysis/sdt/         SDT tables for smaller reviewers.
+      detection/            Bug-detection labels for smaller reviewers.
+      bug_question/         Bug-question probe scores for smaller reviewers.
+    phase8_good/            Good-patch control for the scale extension.
+    frontier/               Closed reviewer (Claude Sonnet): verdicts.
+    mitigation/             RQ4: per-arm verdicts (instruction/, terse/, diff_only/).
+      analysis/             Scorecard, lift table, and interaction GEE.
+    bug_question/           Verdict-free bug-question probe scores (two 70B models).
+    good_bug_question/      Bug-question probe on good patches (two 70B models).
     validation/             Patch-validation sheet and manual coding notes.
     figures/                Generated figures.
   protocols/                Methodology documents (see below).
@@ -87,26 +97,68 @@ The harness and analysis live in `src/`:
 
 ## Reproducing the results
 
-1. **Environment.** Python ≥ 3.10. Install dependencies with
-   `pip install -r requirements.txt`. Install `torch` first with the CUDA build
-   matching your machine. The open-weight reviewers were run on a single
-   NVIDIA H100 (80 GB) GPU each; the two 70B models were loaded in 4-bit and the
-   six smaller models in 16-bit. The closed reviewer needs the `anthropic`
-   package and an `ANTHROPIC_API_KEY` in the environment.
+### Step 1 — Environment
 
-2. **Regenerate raw reviews (optional).** From the package root, run the harness
-   to recollect the full per-trial outputs that were omitted for size:
-   `python run_experiment.py mode=count_trials` to size the job, then the
-   per-patch runs (locally or via `slurm/`), then
-   `python run_experiment.py mode=consolidate`. Configurations for each
-   experiment are in `conf/`.
+Python ≥ 3.10. Install `torch` first with the CUDA build for your machine, then
+the remaining dependencies:
 
-3. **Recompute results from the included verdicts.** Run the analysis scripts in
-   `src/` from the package root; they read the processed `verdicts.csv` files in
-   `results/` and regenerate the approval rates, regressions, detection labels,
-   signal-detection tables, probe scores, mitigation scorecard, and figures. For
-   example, `python src/sdt.py` recomputes the signal-detection tables. No GPU is
-   needed for this step.
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cu124
+pip install -r requirements.txt
+```
+
+The open-weight reviewers were run on a single NVIDIA H100 (80 GB) GPU each;
+the two 70B models were loaded in 4-bit and the six smaller models in 16-bit.
+The closed reviewer needs `ANTHROPIC_API_KEY` in the environment.
+
+### Step 2 — Recompute results from the included verdicts (no GPU needed)
+
+The included `verdicts.csv` files are the primary outputs. Run the analysis
+scripts from the package root in this order:
+
+```bash
+# Detection labels (CAUGHT / MISSED) — must run before analyze.py uses them
+python src/judge_detection.py          # writes results/detection/detection.csv
+
+# Main analysis (approval rates, change rates, McNemar, qualitative flips)
+python src/analyze.py results/verdicts.csv
+
+# GEE logistic regression and odds ratios
+python src/regression.py
+
+# Signal-detection decomposition (d', beta)
+python src/sdt.py
+
+# Bug-question probe (verdict-free sensitivity check)
+python src/bug_question_analysis.py
+
+# RQ4 mitigation scorecard and lift table
+python src/mitigation_analysis.py
+
+# Figures (approval_by_condition.png, change_rate.png)
+python src/figures.py
+```
+
+All outputs land in `results/` and overwrite the included files.
+
+### Step 3 — Regenerate raw reviews (optional, GPU required)
+
+To recollect the full ~200 MB of per-trial JSON responses from scratch:
+
+```bash
+# Size the job first
+python run_experiment.py mode=count_trials
+
+# Run per-patch (locally or via slurm/ — see slurm/run_array.sbatch)
+sbatch slurm/run_array.sbatch                        # default: llama3_70b
+sbatch slurm/run_array.sbatch model=qwen2_5_72b
+
+# After all array tasks finish, consolidate into verdicts.csv
+sbatch --dependency=afterok:<JOB_ID> slurm/analyze.sbatch
+```
+
+For the frontier (API) reviewer, see `protocols/FRONTIER-PLAN.md`.
+Configurations for each experiment variant are in `conf/`.
 
 ### Where each result comes from
 
@@ -114,8 +166,8 @@ The harness and analysis live in `src/`:
   `results/analysis/approval_rates.csv`, `results/analysis/regression_odds_ratios.csv`,
   `results/analysis/rq1_change_rates.csv`, `results/analysis/qualitative_flips.txt`.
 - **RQ2 (lowered bar, not lost sensitivity):** `results/detection/detection.csv`,
-  `results/phase8_good/analysis/sdt/`, and the probe scores under
-  `results/bug_question/` and `results/good_bug_question/`.
+  `results/analysis/sdt/`, `results/phase8_good/analysis/sdt/`, and the probe
+  scores under `results/bug_question/` and `results/good_bug_question/`.
 - **RQ3 (scale and the closed reviewer):** `results/phase8/`, `results/phase8_good/`,
   and `results/frontier/`.
 - **RQ4 (prompt-level fixes):** `results/mitigation/analysis/scorecard.csv` and
@@ -124,10 +176,13 @@ The harness and analysis live in `src/`:
 
 ## Protocols
 
-`protocols/` holds the methodology documents: the review protocol
-(`PROTOCOL.md`), the patch-validation procedure (`PATCH-VALIDATION.md`), the
-bug-detection judge rubric (`JUDGE-PROTOCOL.md`), and the pre-registered
-mitigation plan (`MITIGATION-PLAN.md`).
+`protocols/` holds the methodology documents:
+
+- `PROTOCOL.md` — review protocol, framing conditions, experimental design.
+- `PATCH-VALIDATION.md` — two-layer patch validation (automated + manual audit).
+- `JUDGE-PROTOCOL.md` — bug-detection judge rubric and validation plan.
+- `MITIGATION-PLAN.md` — pre-registered RQ4 mitigation experiment design.
+- `FRONTIER-PLAN.md` — design decisions for the closed-model (Claude Sonnet) extension.
 
 ## License
 

@@ -1,5 +1,5 @@
 """
-Phase 11 mitigation analysis (docs/MITIGATION-PLAN.md §5-§7).
+Phase 11 mitigation analysis (protocols/MITIGATION-PLAN.md §5-§7).
 
 Scores the claim-discount instruction (Arm B), its terse variant (Arm B2), and
 the diff-only ceiling (Arm C) against the locked §6 thresholds, all relative to
@@ -276,7 +276,7 @@ def main() -> None:
     def emit(s: str = "") -> None:
         print(s); lines.append(s)
 
-    emit("Phase 11 mitigation analysis (docs/MITIGATION-PLAN.md §6).")
+    emit("Phase 11 mitigation analysis (protocols/MITIGATION-PLAN.md §6).")
     emit(f"Arms present: {', '.join(present)}.  Models: {len(models)}.")
     emit("Lift L = approval(unsupported_claims) - approval(hedged) on bad patches, pts.")
     emit("Verdict SDT (criterion/d' per arm) is computed separately by src/sdt.py.\n")

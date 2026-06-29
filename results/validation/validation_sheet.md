@@ -1,6 +1,6 @@
 # Detection judge validation - coding sheet
 
-Code each review CAUGHT or MISSED per the rubric in docs/JUDGE-PROTOCOL.md:
+Code each review CAUGHT or MISSED per the rubric in protocols/JUDGE-PROTOCOL.md:
 
 - **CAUGHT**: the review identifies the same underlying issue as the known
   bug (same root cause, same functional area, and the requested changes
